@@ -1,21 +1,62 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useParams } from "react-router-dom";
-import data from "../data.json"
+import data from "../data.json";
 import Header from "./Header";
-
+import { useState } from "react";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const product = data.find((item) => item.id === parseInt(id));
-  console.log(product.image.desktop)
+
+  // Format the price
+  const formattedPrice = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 0, // No decimals
+  }).format(product.price);
+
+  const [count, setCount] = useState(1);
+
+  const increment = () => {
+    setCount((prevCount) => prevCount + 1);
+  };
+
+  const decrement = () => {
+    setCount((prevCount) => (prevCount > 1 ? prevCount - 1 : 1)); // Prevent going below 1
+  };
 
   if (!product) {
     return <p>Product not found</p>;
   }
 
+  const [cartItems, setCartItems] = useState([]);
+
+  const addToCart = (product) => {
+    const productToAdd = { ...product, quantity: count }; // Add quantity field
+
+    setCartItems((prevCart) => {
+      const existingProduct = prevCart.find((item) => item.id === product.id);
+      if (existingProduct) {
+        // Update quantity if product already exists
+        return prevCart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + productToAdd.quantity }
+            : item
+        );
+      }
+      // Add new product
+      return [...prevCart, productToAdd];
+    });
+  };
+
+  const clearCart = () => {
+    setCartItems([]); // Clear all items in the cart
+  };
+
   return (
-    <div className="  ">
+    <div className="">
       <div className="bg-black px-[165px]">
-        <Header />
+        <Header cartItems={cartItems}  clearCart={clearCart} />
       </div>
 
       {/* first container */}
@@ -29,27 +70,61 @@ const ProductDetails = () => {
         </button>
 
         {/* content */}
-        <div>
-{/* Product Image */}
-<div className="flex-1">
-            <img
-              src={product.image.desktop} // Adjust the path resolution
-              alt={product.name}
-              className="w-full h-auto"
-            />
+        <div className="flex gap-[124.5px] justify-center items-center">
+          {/* Product Image */}
+
+          <img
+            src={product.image.desktop}
+            alt={product.name}
+            className="w-[540px] h-[560px] mt-[56px]"
+          />
+
+          {/* product details */}
+          <div className="">
+            {product.new && (
+              <p className="font-regular text-[14px] tracking-[10px] text-burnt-orange">
+                NEW PRODUCT
+              </p>
+            )}
+            <h2 className="font-bold text-[40px] text-black tracking-[1.43px] leading-[44px] mt-[35px] ml-[0.5px]">
+              {product.name}
+            </h2>
+            <p className="text-black leading-[25px] tracking-[0] font-medium text-[15px] opacity-[50%] max-w-[445px] ml-[0.5px] my-[32px]">
+              {product.description}
+            </p>
+            <p className="text-black font-bold text-[18px] tracking-[1.29px] ml-[0.5px]">
+              {formattedPrice}
+            </p>
+            <div className="mt-[47px] flex gap-4">
+              <div className="w-[120px] h-[48px] bg-light-gray flex justify-between items-center px-[15.5px]">
+                {/* Decrease button */}
+                <button
+                  onClick={decrement}
+                  className="font-bold text-[13px] text-black opacity-[25%] tracking-[1px] hover:text-burnt-orange hover:opacity-[100%]"
+                >
+                  -
+                </button>
+
+                {/* Current number */}
+                <span className="font-bold text-[13px] text-black tracking-[1px]">
+                  {count}
+                </span>
+
+                {/* Increase button */}
+                <button
+                  onClick={increment}
+                  className="font-bold text-[13px] text-black opacity-[25%] tracking-[1px] hover:text-burnt-orange hover:opacity-[100%]"
+                >
+                  +
+                </button>
+              </div>
+              <button onClick={() => addToCart(product)} className="bg-burnt-orange hover:bg-peach w-[160px] h-[48px] text-white font-bold text-[13px] tracking-[1px]">
+                ADD TO CART
+              </button>
+            </div>
           </div>
-
- {/* product details */}
- <div>
-
- </div>
         </div>
-       
       </div>
-
-      <h1 className="text-3xl font-bold">{product.name}</h1>
-      {product.new && <p className="text-red-500">NEW PRODUCT</p>}
-      <p className="mt-4">{product.description}</p>
     </div>
   );
 };

@@ -1,7 +1,8 @@
 import data from "../data.json";
-import hero from "../assets/home/desktop/image-hero.jpg";
+import hero from "/assets/home/desktop/image-hero.jpg";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
+
 const HomePage = () => {
   const product = data.find((item) => item.id === 4);
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const HomePage = () => {
         }}
         className="h-screen px-[165px] "
       >
-        <Header />
+        <Header  />
 
         {/* content */}
         <div

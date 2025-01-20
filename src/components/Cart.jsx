@@ -1,19 +1,54 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */
+import { useState, useEffect } from "react";
 
-const Cart = () => {
+const Cart = ({ cartItems, clearCart }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [quantity, setQuantity] = useState(0);
 
+  useEffect(() => {
+    if (cartItems && cartItems.length > 0) {
+      setQuantity(cartItems.map((item) => item.quantity));
+    }
+  }, [cartItems]);
+
+ 
   const toggleCart = () => {
     setIsCartOpen((prev) => !prev);
+  };
+
+  const formattedPrice = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 0,
+  }).format(cartItems?.map((item) => item.price));
+
+  const increment = (index) => {
+    setQuantity((prevQuantities) =>
+      prevQuantities.map((q, i) => (i === index ? q + 1 : q))
+    );
+  };
+  
+  const decrement = (index) => {
+    setQuantity((prevQuantities) =>
+      prevQuantities.map((q, i) => (i === index && q > 1 ? q - 1 : q))
+    );
   };
 
   return (
     <div className="relative">
       {/* Cart Icon */}
       <div
-         className={`cursor-pointer transition-colors ${isCartOpen ? "text-burnt-orange" : "text-white hover:text-burnt-orange"}`}
+        className={`cursor-pointer transition-colors ${
+          isCartOpen
+            ? "text-burnt-orange"
+            : "text-white hover:text-burnt-orange"
+        }`}
         onClick={toggleCart}
+        aria-label="Toggle cart"
+        aria-expanded={isCartOpen}
+        role="button"
       >
+        {/* SVG icon */}
         <svg
           width="24"
           height="20"
@@ -32,18 +67,73 @@ const Cart = () => {
       </div>
 
       {/* Cart Window */}
-      {isCartOpen && (
-        <div className="absolute top-10 right-0 w-80 p-5 bg-white shadow-lg rounded-lg z-50">
-          <h3 className="text-lg font-semibold text-gray-800">Shopping Cart</h3>
-          <p className="text-sm text-gray-600 mt-2">
-            Your cart is currently empty.
-          </p>
-          <button
-            className="mt-4 w-full py-2 bg-orange-500 text-white font-medium rounded-lg hover:bg-orange-600"
-            onClick={toggleCart}
-          >
-            Close
-          </button>
+      {isCartOpen &&  (
+        <div className="absolute top-[129px] right-0 w-[377px] p-5 bg-white shadow-lg rounded-lg z-50 animate-fade-in">
+          {!cartItems ? (
+            <p className="text-sm text-gray-500 text-center py-4">
+              Your cart is empty.
+            </p>
+          ) : (
+            <>
+              <div className="flex justify-between">
+                <h3 className="text-lg font-semibold text-gray-800">Cart</h3>
+                <button
+                  onClick={clearCart}
+                  className="text-black tracking-[0px] leading-[25px] font-medium text-[15px] opacity-[50%]  underline hover:text-burnt-orange "
+                >
+                  Remove all
+                </button>
+              </div>
+              <ul>
+                {cartItems.map((item , index) => (
+                  <li
+                    key={item.id}
+                    className="flex justify-between py-2 text-black "
+                  >
+                    {/* product details */}
+                    <div className="flex">
+                      <img
+                        src={item.image.desktop}
+                        alt={item.name}
+                        className="w-[64px] h-[64px]"
+                      />
+                      <div>
+                        <h2 className="font-bold text-[15px] text-black tracking-[0px] leading-[25px]">
+                          {item.name.split(" ")[0]}
+                        </h2>
+                        <p className="text-black font-bold text-[14px] tracking-[0px] leading-[25px] opacity-[50%]">
+                          {formattedPrice}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="w-[120px] h-[48px] bg-light-gray flex justify-between items-center px-[15.5px]">
+                      {/* Decrease button */}
+                      <button
+                          onClick={() => decrement(index)}
+                        className="font-bold text-[13px] text-black opacity-[25%] tracking-[1px] hover:text-burnt-orange hover:opacity-[100%]"
+                      >
+                        -
+                      </button>
+
+                      {/* Current number */}
+                      <span className="font-bold text-[13px] text-black tracking-[1px]">
+                      {quantity[index]}
+                      </span>
+
+                      {/* Increase button */}
+                      <button
+                        onClick={() => increment(index)}
+                        className="font-bold text-[13px] text-black opacity-[25%] tracking-[1px] hover:text-burnt-orange hover:opacity-[100%]"
+                      >
+                        +
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
         </div>
       )}
     </div>
