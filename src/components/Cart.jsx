@@ -1,36 +1,20 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-const Cart = ({ cartItems, clearCart }) => {
+const Cart = ({ cartItems, setCartItems, clearCart }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [quantity, setQuantity] = useState(0);
 
-  useEffect(() => {
-    if (cartItems && cartItems.length > 0) {
-      setQuantity(cartItems.map((item) => item.quantity));
-    }
-  }, [cartItems]);
-
- 
   const toggleCart = () => {
     setIsCartOpen((prev) => !prev);
   };
 
-  const formattedPrice = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 0,
-  }).format(cartItems?.map((item) => item.price));
-
-  const increment = (index) => {
-    setQuantity((prevQuantities) =>
-      prevQuantities.map((q, i) => (i === index ? q + 1 : q))
-    );
-  };
-  
-  const decrement = (index) => {
-    setQuantity((prevQuantities) =>
-      prevQuantities.map((q, i) => (i === index && q > 1 ? q - 1 : q))
+  const updateQuantity = (id, delta) => {
+    setCartItems((prevCart) =>
+      prevCart.map((item) =>
+        item.id === id
+          ? { ...item, quantity: Math.max(item.quantity + delta, 1) }
+          : item
+      )
     );
   };
 
@@ -67,7 +51,7 @@ const Cart = ({ cartItems, clearCart }) => {
       </div>
 
       {/* Cart Window */}
-      {isCartOpen &&  (
+      {isCartOpen && (
         <div className="absolute top-[129px] right-0 w-[377px] p-5 bg-white shadow-lg rounded-lg z-50 animate-fade-in">
           {!cartItems ? (
             <p className="text-sm text-gray-500 text-center py-4">
@@ -85,7 +69,7 @@ const Cart = ({ cartItems, clearCart }) => {
                 </button>
               </div>
               <ul>
-                {cartItems.map((item , index) => (
+                {cartItems.map((item) => (
                   <li
                     key={item.id}
                     className="flex justify-between py-2 text-black "
@@ -102,7 +86,11 @@ const Cart = ({ cartItems, clearCart }) => {
                           {item.name.split(" ")[0]}
                         </h2>
                         <p className="text-black font-bold text-[14px] tracking-[0px] leading-[25px] opacity-[50%]">
-                          {formattedPrice}
+                          {new Intl.NumberFormat("en-US", {
+                            style: "currency",
+                            currency: "USD",
+                            minimumFractionDigits: 0,
+                          }).format(item.price)}
                         </p>
                       </div>
                     </div>
@@ -110,7 +98,7 @@ const Cart = ({ cartItems, clearCart }) => {
                     <div className="w-[120px] h-[48px] bg-light-gray flex justify-between items-center px-[15.5px]">
                       {/* Decrease button */}
                       <button
-                          onClick={() => decrement(index)}
+                        onClick={() => updateQuantity(item.id, -1)}
                         className="font-bold text-[13px] text-black opacity-[25%] tracking-[1px] hover:text-burnt-orange hover:opacity-[100%]"
                       >
                         -
@@ -118,12 +106,12 @@ const Cart = ({ cartItems, clearCart }) => {
 
                       {/* Current number */}
                       <span className="font-bold text-[13px] text-black tracking-[1px]">
-                      {quantity[index]}
+                        {item.quantity}
                       </span>
 
                       {/* Increase button */}
                       <button
-                        onClick={() => increment(index)}
+                        onClick={() => updateQuantity(item.id, 1)}
                         className="font-bold text-[13px] text-black opacity-[25%] tracking-[1px] hover:text-burnt-orange hover:opacity-[100%]"
                       >
                         +

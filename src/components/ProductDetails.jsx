@@ -1,12 +1,13 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import { useParams } from "react-router-dom";
 import data from "../data.json";
 import Header from "./Header";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const product = data.find((item) => item.id === parseInt(id));
+  const [count, setCount] = useState(1);
+  const [cartItems, setCartItems] = useState();
 
   // Format the price
   const formattedPrice = new Intl.NumberFormat("en-US", {
@@ -14,8 +15,6 @@ const ProductDetails = () => {
     currency: "USD",
     minimumFractionDigits: 0, // No decimals
   }).format(product.price);
-
-  const [count, setCount] = useState(1);
 
   const increment = () => {
     setCount((prevCount) => prevCount + 1);
@@ -25,11 +24,24 @@ const ProductDetails = () => {
     setCount((prevCount) => (prevCount > 1 ? prevCount - 1 : 1)); // Prevent going below 1
   };
 
-  if (!product) {
-    return <p>Product not found</p>;
-  }
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cartItems");
+    console.log(storedCart)
+    try {
+      // Only parse if data exists
+      if (storedCart) {
+        const parsedCart = JSON.parse(storedCart);
+        setCartItems(parsedCart); // Set the parsed data to state
+      }
+    } catch (error) {
+      console.error("Failed to parse cartItems from localStorage:", error);
+    }
+  }, []);
 
-  const [cartItems, setCartItems] = useState([]);
+  // Save cart items to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const addToCart = (product) => {
     const productToAdd = { ...product, quantity: count }; // Add quantity field
@@ -50,13 +62,18 @@ const ProductDetails = () => {
   };
 
   const clearCart = () => {
-    setCartItems([]); // Clear all items in the cart
+    setCartItems([]);
+    localStorage.removeItem("cartItems");
   };
 
   return (
     <div className="">
       <div className="bg-black px-[165px]">
-        <Header cartItems={cartItems}  clearCart={clearCart} />
+        <Header
+          cartItems={cartItems}
+          clearCart={clearCart}
+          setCartItems={setCartItems}
+        />
       </div>
 
       {/* first container */}
@@ -118,7 +135,10 @@ const ProductDetails = () => {
                   +
                 </button>
               </div>
-              <button onClick={() => addToCart(product)} className="bg-burnt-orange hover:bg-peach w-[160px] h-[48px] text-white font-bold text-[13px] tracking-[1px]">
+              <button
+                onClick={() => addToCart(product)}
+                className="bg-burnt-orange hover:bg-peach w-[160px] h-[48px] text-white font-bold text-[13px] tracking-[1px]"
+              >
                 ADD TO CART
               </button>
             </div>
