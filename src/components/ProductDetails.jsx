@@ -1,13 +1,10 @@
+/* eslint-disable react/prop-types */
 import { useParams } from "react-router-dom";
 import data from "../data.json";
-import Header from "./Header";
-import { useState, useEffect } from "react";
 
-const ProductDetails = () => {
+const ProductDetails = ({ addToCart , increment , decrement , count}) => {
   const { id } = useParams();
   const product = data.find((item) => item.id === parseInt(id));
-  const [count, setCount] = useState(1);
-  const [cartItems, setCartItems] = useState();
 
   // Format the price
   const formattedPrice = new Intl.NumberFormat("en-US", {
@@ -16,65 +13,9 @@ const ProductDetails = () => {
     minimumFractionDigits: 0, // No decimals
   }).format(product.price);
 
-  const increment = () => {
-    setCount((prevCount) => prevCount + 1);
-  };
-
-  const decrement = () => {
-    setCount((prevCount) => (prevCount > 1 ? prevCount - 1 : 1)); // Prevent going below 1
-  };
-
-  useEffect(() => {
-    const storedCart = localStorage.getItem("cartItems");
-    console.log(storedCart)
-    try {
-      // Only parse if data exists
-      if (storedCart) {
-        const parsedCart = JSON.parse(storedCart);
-        setCartItems(parsedCart); // Set the parsed data to state
-      }
-    } catch (error) {
-      console.error("Failed to parse cartItems from localStorage:", error);
-    }
-  }, []);
-
-  // Save cart items to localStorage whenever it changes
-  useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [cartItems]);
-
-  const addToCart = (product) => {
-    const productToAdd = { ...product, quantity: count }; // Add quantity field
-
-    setCartItems((prevCart) => {
-      const existingProduct = prevCart.find((item) => item.id === product.id);
-      if (existingProduct) {
-        // Update quantity if product already exists
-        return prevCart.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + productToAdd.quantity }
-            : item
-        );
-      }
-      // Add new product
-      return [...prevCart, productToAdd];
-    });
-  };
-
-  const clearCart = () => {
-    setCartItems([]);
-    localStorage.removeItem("cartItems");
-  };
-
   return (
     <div className="">
-      <div className="bg-black px-[165px]">
-        <Header
-          cartItems={cartItems}
-          clearCart={clearCart}
-          setCartItems={setCartItems}
-        />
-      </div>
+      <div className="bg-black h-[96px]"></div>
 
       {/* first container */}
       <div className="px-[165px] pt-[79px]">

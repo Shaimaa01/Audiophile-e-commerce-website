@@ -18,6 +18,12 @@ const Cart = ({ cartItems, setCartItems, clearCart }) => {
     );
   };
 
+  const closeCart = (e) => {
+    if (e.target.classList.contains("cart-overlay")) {
+      setIsCartOpen(false);
+    }
+  };
+
   return (
     <div className="relative">
       {/* Cart Icon */}
@@ -49,6 +55,14 @@ const Cart = ({ cartItems, setCartItems, clearCart }) => {
           />
         </svg>
       </div>
+
+      {/* Fullscreen Overlay */}
+      {isCartOpen && (
+        <div
+          className="cart-overlay fixed top-0 left-0 w-full h-full bg-black opacity-40 z-40"
+          onClick={closeCart}
+        ></div>
+      )}
 
       {/* Cart Window */}
       {isCartOpen && (
