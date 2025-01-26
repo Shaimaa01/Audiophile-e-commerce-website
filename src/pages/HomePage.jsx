@@ -23,7 +23,7 @@ const HomePage = () => {
         className="h-screen px-[165px] "
       >
         {/* for header */}
-        <div className="h-[96px]"></div>
+        <div className="h-[96px] border-b border-[#979797] "></div>
         {/* content */}
         <div
           className="relative "

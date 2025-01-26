@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useParams } from "react-router-dom";
 import data from "../data.json";
+import GoBackButton from "../components/GoBackButton";
 
-const ProductDetails = ({ addToCart , increment , decrement , count}) => {
+const ProductDetails = ({ addToCart, increment, decrement, count }) => {
   const { id } = useParams();
   const product = data.find((item) => item.id === parseInt(id));
 
@@ -15,42 +16,36 @@ const ProductDetails = ({ addToCart , increment , decrement , count}) => {
 
   return (
     <div className="">
-      <div className="bg-black h-[96px]"></div>
+      {/* Header */}
+      <div className="bg-black h-[97px] "></div>
 
-      {/* first container */}
-      <div className="px-[165px] pt-[79px]">
-        {/* go back button */}
-        <button
-          className=" font-medium text-[15px] text-black opacity-[50%] hover:text-burnt-orange hover:opacity-[100%]"
-          onClick={() => window.history.back()}
-        >
-          Go Back
-        </button>
+      {/* product container */}
+      <div className="px-[165px] bg-off-white">
+        <GoBackButton />
 
-        {/* content */}
-        <div className="flex gap-[124.5px] justify-center items-center">
+        {/* Product Image +  product details  */}
+        <div className="flex gap-[124.5px] justify-center items-center h-[560px] ">
           {/* Product Image */}
-
           <img
             src={product.image.desktop}
             alt={product.name}
-            className="w-[540px] h-[560px] mt-[56px]"
+            className="w-[540px] h-full rounded-md "
           />
 
           {/* product details */}
           <div className="">
             {product.new && (
-              <p className="font-regular text-[14px] tracking-[10px] text-burnt-orange">
+              <p className="font-regular text-[14px] tracking-[10px] text-burnt-orange mb-[15px]">
                 NEW PRODUCT
               </p>
             )}
-            <h2 className="font-bold text-[40px] text-black tracking-[1.43px] leading-[44px] mt-[35px] ml-[0.5px]">
+            <h2 className="font-bold text-[40px] text-black tracking-[1.43px] leading-[44px] ">
               {product.name}
             </h2>
-            <p className="text-black leading-[25px] tracking-[0] font-medium text-[15px] opacity-[50%] max-w-[445px] ml-[0.5px] my-[32px]">
+            <p className="text-black leading-[25px] tracking-[0] font-medium text-[15px] opacity-[50%] max-w-[445px]  my-[32px]">
               {product.description}
             </p>
-            <p className="text-black font-bold text-[18px] tracking-[1.29px] ml-[0.5px]">
+            <p className="text-black font-bold text-[18px] tracking-[1.29px] ">
               {formattedPrice}
             </p>
             <div className="mt-[47px] flex gap-4">
@@ -83,6 +78,34 @@ const ProductDetails = ({ addToCart , increment , decrement , count}) => {
                 ADD TO CART
               </button>
             </div>
+          </div>
+        </div>
+
+        {/* Features + in box */}
+        <div className="my-[160px] flex justify-between ">
+          <div>
+            <h2 className="text-black tracking-[1.14px] leading-[36px] font-bold text-[32px] ">
+              FEATURES
+            </h2>
+            <p className="max-w-[635px] text-black opacity-50 tracking-0 leading-[25px] font-medium text-[15px] mt-[32px]">
+              {product.features}
+            </p>
+          </div>
+          <div className="w-[350px]">
+            <h2 className="text-black leading-[36px] tracking-[1.14px] font-bold text-[32px] uppercase mb-[27px]">
+              in the box
+            </h2>
+            {product.includes.map((include, index) => (
+              <p
+                className=" py-[5px] text-black tracking-0  text-[15px]   "
+                key={index}
+              >
+                <span className="mr-[24px] text-burnt-orange  font-bold  opacity-100">
+                  {include.quantity}x
+                </span>
+                <span className="opacity-50 font-medium">{include.item}</span>
+              </p>
+            ))}
           </div>
         </div>
       </div>

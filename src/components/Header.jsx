@@ -5,7 +5,7 @@ import Cart from "./Cart";
 
 const Header = ({ cartItems, clearCart , setCartItems }) => {
   return (
-    <header className="flex justify-between items-center text-white border-b border-[#979797] h-[96px]  absolute w-[calc(100%-330px)] left-[165px] z-10" >
+    <header className="flex justify-between items-center text-white h-[96px]  absolute w-[calc(100%-330px)] left-[165px] z-10" >
       {/* Logo */}
       <Logo />
 

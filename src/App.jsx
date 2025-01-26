@@ -5,12 +5,21 @@ import HeadphonesPage from "./pages/HeadphonesPage";
 import SpeakersPage from "./pages/SpeakersPage";
 import EarphonesPage from "./pages/EarphonesPage";
 import HomePage from "./pages/HomePage";
-import ProductDetails from "./components/ProductDetails";
+import ProductDetailPage from "./pages/ProductDetailPage";
 import Header from "./components/Header";
 import { useState, useEffect } from "react";
 
 function App() {
-  const [cartItems, setCartItems] = useState();
+  // Initialize cartItems with data from localStorage
+  const [cartItems, setCartItems] = useState(() => {
+    try {
+      const storedCart = localStorage.getItem("cartItems");
+      return storedCart ? JSON.parse(storedCart) : []; // Return parsed data or empty array
+    } catch (error) {
+      console.error("Failed to parse cartItems from localStorage:", error);
+      return []; // Fallback to empty array if parsing fails
+    }
+  });
   const [count, setCount] = useState(1);
 
   const increment = () => {
@@ -20,20 +29,6 @@ function App() {
   const decrement = () => {
     setCount((prevCount) => (prevCount > 1 ? prevCount - 1 : 1)); // Prevent going below 1
   };
-
-  useEffect(() => {
-    const storedCart = localStorage.getItem("cartItems");
-    console.log(storedCart);
-    try {
-      // Only parse if data exists
-      if (storedCart) {
-        const parsedCart = JSON.parse(storedCart);
-        setCartItems(parsedCart); // Set the parsed data to state
-      }
-    } catch (error) {
-      console.error("Failed to parse cartItems from localStorage:", error);
-    }
-  }, []);
 
   // Save cart items to localStorage whenever it changes
   useEffect(() => {
@@ -79,7 +74,7 @@ function App() {
           <Route
             path="/product/:id"
             element={
-              <ProductDetails
+              <ProductDetailPage
                 addToCart={addToCart}
                 increment={increment}
                 decrement={decrement}
