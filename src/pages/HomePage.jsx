@@ -5,7 +5,6 @@ import zx7 from "/public/assets/home/desktop/image-speaker-zx7.jpg";
 import zx9 from "/public/assets/home/desktop/image-speaker-zx9.png";
 import circles from "/assets/home/desktop/pattern-circles.svg";
 import earphones from "/public/assets/home/desktop/image-earphones-yx1.jpg";
-
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import Man from "../components/Man";
@@ -46,7 +45,7 @@ const HomePage = () => {
               made for the passionate music enthusiast.
             </p>
             <button
-              className="w-[160px] h-[48px] bg-burnt-orange hover:bg-peach text-white mt-[40px] font-bold text-[13px] tracking-[1px]"
+              className="w-[160px] h-[48px] bg-burnt-orange hover:bg-peach text-white mt-[40px] font-bold text-[13px] tracking-[1px] uppercase"
               onClick={() => navigate(`/product/${product.id}`)}
             >
               See Product

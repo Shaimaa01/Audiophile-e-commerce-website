@@ -10,7 +10,7 @@ function ThreeProducts() {
   const yx1_earphones = data.find((item) => item.id === 1);
 
   return (
-    <div className="px-[165px] pt-[200px] pb-[168px] ">
+    <div className="mx-[165px] pt-[80px] my-[160px]">
       <div className="flex justify-between items-center w-full">
         <div className=" w-[350px]  h-[204px] bg-light-gray relative pt-[80px] text-center rounded-lg  ">
           <img

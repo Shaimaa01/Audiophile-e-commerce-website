@@ -2,7 +2,7 @@ import man from "/public/assets/home/desktop/Bitmap.svg";
 
 function Man() {
   return (
-    <div className=" px-[165px] my-[200px] h-[588px] flex justify-between items-center">
+    <div className=" mx-[165px] my-[160px] h-[588px] flex justify-between items-center">
       <div className="w-[445px] h-[295px]">
         <h2 className="text-black leading-[44px] tracking-[1.43px] font-bold text-[40px] uppercase">
           Bringing you the <span className="text-burnt-orange">best</span> audio
