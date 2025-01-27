@@ -2,10 +2,15 @@
 import { useParams } from "react-router-dom";
 import data from "../data.json";
 import GoBackButton from "../components/GoBackButton";
+import { useNavigate } from "react-router-dom";
+import ThreeProducts from "../components/ThreeProducts";
+import Man from "../components/Man";
+import Footer from "../components/Footer";
 
 const ProductDetails = ({ addToCart, increment, decrement, count }) => {
   const { id } = useParams();
   const product = data.find((item) => item.id === parseInt(id));
+  const navigate = useNavigate();
 
   // Format the price
   const formattedPrice = new Intl.NumberFormat("en-US", {
@@ -20,11 +25,11 @@ const ProductDetails = ({ addToCart, increment, decrement, count }) => {
       <div className="bg-black h-[97px] "></div>
 
       {/* product container */}
-      <div className="px-[165px] bg-off-white">
+      <div className=" bg-off-white">
         <GoBackButton />
 
         {/* Product Image +  product details  */}
-        <div className="flex gap-[124.5px] justify-center items-center h-[560px] ">
+        <div className="flex gap-[124.5px] justify-center items-center h-[560px] px-[165px] ">
           {/* Product Image */}
           <img
             src={product.image.desktop}
@@ -82,7 +87,7 @@ const ProductDetails = ({ addToCart, increment, decrement, count }) => {
         </div>
 
         {/* Features + in box */}
-        <div className="my-[160px] flex justify-between ">
+        <div className="my-[160px] px-[165px] flex justify-between ">
           <div>
             <h2 className="text-black tracking-[1.14px] leading-[36px] font-bold text-[32px] ">
               FEATURES
@@ -108,6 +113,54 @@ const ProductDetails = ({ addToCart, increment, decrement, count }) => {
             ))}
           </div>
         </div>
+
+        {/* product photos */}
+        <div className=" h-[592px] my-[160px] px-[165px] flex justify-between gap-[30px]">
+          <div className="flex justify-between flex-col gap-[30px]">
+            <img
+              src={product.gallery.first.desktop}
+              className="rounded-[8px] w-[445px] h-[280px]"
+            />
+            <img
+              src={product.gallery.second.desktop}
+              className="rounded-[8px] w-[445px] h-[280px]"
+            />
+          </div>
+          <img
+            src={product.gallery.third.desktop}
+            className="rounded-[8px] w-[635px] h-full"
+          />
+        </div>
+
+        {/* you may also like */}
+        <div className="my-[160px] px-[165px] text-center">
+          <h2 className=" text-black tracking-[1.14px] font-bold text-[32px] uppercase">
+            you may also like
+          </h2>
+          <div className="mt-[64px] h-[471px] flex gap-[30px]">
+            {product.others.map((otherProduct, index) => (
+              <div key={index}>
+                <img src={otherProduct.image.desktop} alt={otherProduct.name} className="rounded-[8px]" />
+                <h3 className="text-black tracking-[1.71px] font-bold text-[24px] mt-[40px] ">{otherProduct.name}</h3>
+                <button
+                  className="w-[160px] h-[48px] bg-burnt-orange hover:bg-peach text-white mt-[32px] font-bold text-[13px] tracking-[1px] uppercase"
+                  onClick={() => {
+                    window.scrollTo({ top: 0 });
+                    navigate(`/product/${otherProduct.id}`);
+                  }}
+                >
+                  See Product
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <ThreeProducts/>
+        
+        <Man/>
+
+        <Footer/>
       </div>
     </div>
   );

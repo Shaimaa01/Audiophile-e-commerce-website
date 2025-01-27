@@ -3,6 +3,7 @@ import earphone from "/public/assets/shared/desktop/image-category-thumbnail-ear
 import headphone from "/public/assets/shared/desktop/image-category-thumbnail-headphones.png";
 import speakers from "/public/assets/shared/desktop/image-category-thumbnail-speakers.png";
 import arrow from "/public/assets/shared/desktop/icon-arrow-right.svg";
+import { Link } from "react-router-dom";
 
 function ThreeProducts() {
   const xx99_mark_one_headphones = data.find((item) => item.id === 3);
@@ -20,10 +21,18 @@ function ThreeProducts() {
           <p className="text-black pt-[35px] font-bold text-[18px] uppercase tracking-[1.29px]">
             {xx99_mark_one_headphones.category}
           </p>
-          <button className="pt-[20px] font-bold text-[13px] tracking-[1px] flex  justify-between items-center w-[57.32px] uppercase mx-auto hover:text-burnt-orange ">
-            <span className="opacity-50 hover:opacity-100"> shop </span>
-            <img src={arrow} className="opacity-100" />
-          </button>
+
+          <Link
+            to="/headphones"
+            onClick={() => {
+              window.scrollTo({ top: 0 });
+            }}
+          >
+            <button className="pt-[20px] font-bold text-[13px] tracking-[1px] flex  justify-between items-center w-[57.32px] uppercase mx-auto hover:text-burnt-orange ">
+              <span className="opacity-50 hover:opacity-100"> shop </span>
+              <img src={arrow} className="opacity-100" />
+            </button>
+          </Link>
         </div>
 
         <div className=" w-[350px]  h-[204px] bg-light-gray relative pt-[80px] text-center rounded-lg  ">
@@ -34,10 +43,18 @@ function ThreeProducts() {
           <p className="text-black pt-[35px] font-bold text-[18px] uppercase tracking-[1.29px]">
             {zx9_speaker.category}
           </p>
-          <button className="pt-[20px] font-bold text-[13px] tracking-[1px] flex  justify-between items-center w-[57.32px] uppercase mx-auto hover:text-burnt-orange">
-            <span className="opacity-50 hover:opacity-100"> shop </span>
-            <img src={arrow} className="opacity-100" />
-          </button>
+
+          <Link
+            to="/speakers"
+            onClick={() => {
+              window.scrollTo({ top: 0 });
+            }}
+          >
+            <button className="pt-[20px] font-bold text-[13px] tracking-[1px] flex  justify-between items-center w-[57.32px] uppercase mx-auto hover:text-burnt-orange">
+              <span className="opacity-50 hover:opacity-100"> shop </span>
+              <img src={arrow} className="opacity-100" />
+            </button>
+          </Link>
         </div>
 
         <div className=" w-[350px]  h-[204px] bg-light-gray relative pt-[80px] text-center rounded-lg  ">
@@ -48,10 +65,18 @@ function ThreeProducts() {
           <p className="text-black pt-[35px] font-bold text-[18px] uppercase tracking-[1.29px]">
             {yx1_earphones.category}
           </p>
-          <button className="pt-[20px] font-bold text-[13px] tracking-[1px] flex  justify-between items-center w-[57.32px] uppercase mx-auto hover:text-burnt-orange">
-            <span className="opacity-50 hover:opacity-100"> shop </span>
-            <img src={arrow} className="opacity-100" />
-          </button>
+
+          <Link
+            to="/earphones"
+            onClick={() => {
+              window.scrollTo({ top: 0 });
+            }}
+          >
+            <button className="pt-[20px] font-bold text-[13px] tracking-[1px] flex  justify-between items-center w-[57.32px] uppercase mx-auto hover:text-burnt-orange">
+              <span className="opacity-50 hover:opacity-100"> shop </span>
+              <img src={arrow} className="opacity-100" />
+            </button>
+          </Link>
         </div>
       </div>
     </div>
