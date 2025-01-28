@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Cart = ({ cartItems, setCartItems, clearCart }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleCart = () => {
     setIsCartOpen((prev) => !prev);
@@ -24,6 +26,19 @@ const Cart = ({ cartItems, setCartItems, clearCart }) => {
     }
   };
 
+  const calculateTotal = () => {
+    const productTotal = cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+    const shipping = 50;
+    const vat = productTotal * 0.2;
+    return productTotal + shipping + vat;
+  };
+
+  const removeItem = (id) => {
+    setCartItems((prevCart) => prevCart.filter((item) => item.id !== id));
+  };
   return (
     <div className="relative">
       {/* Cart Icon */}
@@ -66,40 +81,49 @@ const Cart = ({ cartItems, setCartItems, clearCart }) => {
 
       {/* Cart Window */}
       {isCartOpen && (
-        <div className="absolute top-[129px] right-0 w-[377px] p-5 bg-white shadow-lg rounded-lg z-50 animate-fade-in">
-          {!cartItems ? (
-            <p className="text-sm text-gray-500 text-center py-4">
+        <div className="absolute top-[88px] right-0 w-[377px] p-[32px] bg-white shadow-lg rounded-lg z-50 animate-fade-in">
+          {!cartItems.length ? (
+            <p className="text-sm text-gray-500 text-center">
               Your cart is empty.
             </p>
           ) : (
             <>
-              <div className="flex justify-between">
-                <h3 className="text-lg font-semibold text-gray-800">Cart</h3>
+              <div className="flex justify-between mb-[32px]">
+                <h3 className="text-[18px] font-bold tracking-[1.29px] text-black uppercase">
+                  Cart (<span>{cartItems.length}</span>)
+                </h3>
                 <button
                   onClick={clearCart}
-                  className="text-black tracking-[0px] leading-[25px] font-medium text-[15px] opacity-[50%]  underline hover:text-burnt-orange "
+                  className="text-black tracking-[0px] leading-[25px] font-medium text-[15px] opacity-[50%] underline hover:text-burnt-orange"
                 >
                   Remove all
                 </button>
               </div>
-              <ul>
+              <ul className="flex flex-col gap-[24px]">
                 {cartItems.map((item) => (
                   <li
                     key={item.id}
-                    className="flex justify-between py-2 text-black "
+                    className="flex justify-between items-center text-black"
                   >
-                    {/* product details */}
-                    <div className="flex">
+                    {/* Product details */}
+                    <div className="flex items-center relative">
+                      <button
+                        onClick={() => removeItem(item.id)}
+                        className=" text-[13px]  hover:text-white hover:bg-red-500  absolute -left-1 -top-2   border   w-[18px] h-[18px] rounded-full  flex items-center justify-center shadow-xl "
+                      >
+                        x
+                      </button>
                       <img
                         src={item.image.desktop}
                         alt={item.name}
-                        className="w-[64px] h-[64px]"
+                        className="w-[64px] h-[64px] rounded-[8px] mr-[16px]"
                       />
+
                       <div>
-                        <h2 className="font-bold text-[15px] text-black tracking-[0px] leading-[25px]">
+                        <h2 className="font-bold text-[15px] text-black tracking-0 leading-[25px]">
                           {item.name.split(" ")[0]}
                         </h2>
-                        <p className="text-black font-bold text-[14px] tracking-[0px] leading-[25px] opacity-[50%]">
+                        <p className="text-black font-bold text-[14px] tracking-0 opacity-[50%] leading-[25px]">
                           {new Intl.NumberFormat("en-US", {
                             style: "currency",
                             currency: "USD",
@@ -109,21 +133,17 @@ const Cart = ({ cartItems, setCartItems, clearCart }) => {
                       </div>
                     </div>
 
-                    <div className="w-[120px] h-[48px] bg-light-gray flex justify-between items-center px-[15.5px]">
-                      {/* Decrease button */}
+                    {/* Quantity controls */}
+                    <div className="w-[96px] h-[32px] bg-light-gray flex justify-between items-center px-[15.5px] ">
                       <button
                         onClick={() => updateQuantity(item.id, -1)}
                         className="font-bold text-[13px] text-black opacity-[25%] tracking-[1px] hover:text-burnt-orange hover:opacity-[100%]"
                       >
                         -
                       </button>
-
-                      {/* Current number */}
                       <span className="font-bold text-[13px] text-black tracking-[1px]">
                         {item.quantity}
                       </span>
-
-                      {/* Increase button */}
                       <button
                         onClick={() => updateQuantity(item.id, 1)}
                         className="font-bold text-[13px] text-black opacity-[25%] tracking-[1px] hover:text-burnt-orange hover:opacity-[100%]"
@@ -133,6 +153,30 @@ const Cart = ({ cartItems, setCartItems, clearCart }) => {
                     </div>
                   </li>
                 ))}
+
+                {/* Total  */}
+                <div className="flex justify-between items-center text-black mt-[8px]">
+                  <h3 className="uppercase font-medium text-[15px] tracking-0 opacity-50">
+                    total
+                  </h3>
+                  <p className="font-bold text-[18px] tracking-0">
+                    {new Intl.NumberFormat("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                    }).format(calculateTotal())}
+                  </p>
+                </div>
+
+                {/* check out button */}
+                <button
+                  onClick={() => {
+                    navigate(`/check-out`);
+                    setIsCartOpen(false);
+                  }}
+                  className=" w-full h-[48px] bg-burnt-orange hover:bg-peach text-white  font-medium text-[13px] tracking-[1px] uppercase"
+                >
+                  checkout
+                </button>
               </ul>
             </>
           )}

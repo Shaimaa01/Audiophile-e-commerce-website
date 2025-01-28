@@ -8,6 +8,7 @@ import HomePage from "./pages/HomePage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import Header from "./components/Header";
 import { useState, useEffect } from "react";
+import CheckOutPage from "./pages/CheckOutPage";
 
 function App() {
   // Initialize cartItems with data from localStorage
@@ -82,6 +83,7 @@ function App() {
               />
             }
           />
+          <Route path="/check-out" element={<CheckOutPage/>} />
         </Routes>
       </Router>
     </>

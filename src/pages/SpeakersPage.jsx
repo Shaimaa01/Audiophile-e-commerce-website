@@ -44,7 +44,10 @@ const SpeakersPage = () => {
             </p>
             <button
               className="w-[160px] h-[48px] bg-burnt-orange hover:bg-peach text-white mt-[40px] font-bold text-[13px] tracking-[1px] uppercase"
-              onClick={() => navigate(`/product/${zx9.id}`)}
+              onClick={() => {
+                navigate(`/product/${zx9.id}`);
+                window.scrollTo({ top: 0 });
+              }}
             >
               See Product
             </button>
@@ -69,7 +72,10 @@ const SpeakersPage = () => {
             </p>
             <button
               className="w-[160px] h-[48px] bg-burnt-orange hover:bg-peach text-white mt-[40px] font-bold text-[13px] tracking-[1px] uppercase"
-              onClick={() => navigate(`/product/${zx7.id}`)}
+              onClick={() => {
+                navigate(`/product/${zx7.id}`);
+                window.scrollTo({ top: 0 });
+              }}
             >
               See Product
             </button>

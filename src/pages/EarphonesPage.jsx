@@ -12,7 +12,7 @@ const EarphonesPage = () => {
     <div className="bg-off-white">
       {/* header */}
       <div className="h-[96px] bg-black  ">
-      <div className="border-b border-[#979797] mx-[165px] h-[96px] "></div>
+        <div className="border-b border-[#979797] mx-[165px] h-[96px] "></div>
       </div>
 
       {/* headphone header */}
@@ -43,7 +43,10 @@ const EarphonesPage = () => {
             </p>
             <button
               className="w-[160px] h-[48px] bg-burnt-orange hover:bg-peach text-white mt-[40px] font-bold text-[13px] tracking-[1px] uppercase"
-              onClick={() => navigate(`/product/${yx1.id}`)}
+              onClick={() => {
+                navigate(`/product/${yx1.id}`);
+                window.scrollTo({ top: 0 });
+              }}
             >
               See Product
             </button>

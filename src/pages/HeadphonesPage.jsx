@@ -47,7 +47,10 @@ const HeadphonesPage = () => {
             </p>
             <button
               className="w-[160px] h-[48px] bg-burnt-orange hover:bg-peach text-white mt-[40px] font-bold text-[13px] tracking-[1px] uppercase"
-              onClick={() => navigate(`/product/${xx99II.id}`)}
+              onClick={() => {
+                navigate(`/product/${xx99II.id}`);
+                window.scrollTo({ top: 0 });
+              }}
             >
               See Product
             </button>
@@ -72,7 +75,10 @@ const HeadphonesPage = () => {
             </p>
             <button
               className="w-[160px] h-[48px] bg-burnt-orange hover:bg-peach text-white mt-[40px] font-bold text-[13px] tracking-[1px] uppercase"
-              onClick={() => navigate(`/product/${xx99I.id}`)}
+              onClick={() => {
+                navigate(`/product/${xx99I.id}`);
+                window.scrollTo({ top: 0 });
+              }}
             >
               See Product
             </button>
@@ -108,7 +114,10 @@ const HeadphonesPage = () => {
             </p>
             <button
               className="w-[160px] h-[48px] bg-burnt-orange hover:bg-peach text-white mt-[40px] font-bold text-[13px] tracking-[1px] uppercase"
-              onClick={() => navigate(`/product/${xx59.id}`)}
+              onClick={() => {
+                navigate(`/product/${xx59.id}`);
+                window.scrollTo({ top: 0 });
+              }}
             >
               See Product
             </button>
