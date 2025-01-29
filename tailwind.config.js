@@ -7,6 +7,7 @@ export default {
         "burnt-orange": "#D87D4A",
         "dark-gray": "#101010",
         "light-gray": "#F1F1F1",
+        "silver-gray": "#CFCFCF",
         "off-white": "#FAFAFA",
         peach: "#fbaf85",
         white: "#FFFFFF",
