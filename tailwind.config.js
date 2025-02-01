@@ -12,6 +12,7 @@ export default {
         peach: "#fbaf85",
         white: "#FFFFFF",
         black: "#000000",
+        red:"#CD2C2C",
       },
       fontFamily: {
         manrope: ["Manrope", "sans-serif"],

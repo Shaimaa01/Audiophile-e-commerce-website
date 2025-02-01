@@ -31,9 +31,8 @@ const Cart = ({ cartItems, setCartItems, clearCart }) => {
       (total, item) => total + item.price * item.quantity,
       0
     );
-    const shipping = 50;
-    const vat = productTotal * 0.2;
-    return productTotal + shipping + vat;
+
+    return productTotal;
   };
 
   const removeItem = (id) => {
@@ -94,7 +93,7 @@ const Cart = ({ cartItems, setCartItems, clearCart }) => {
                 </h3>
                 <button
                   onClick={clearCart}
-                  className="text-black tracking-[0px] leading-[25px] font-medium text-[15px] opacity-[50%] underline hover:text-burnt-orange"
+                  className="text-black tracking-[0px] leading-[25px] font-medium text-[15px] opacity-[50%] underline hover:text-burnt-orange hover:opacity-[100%]"
                 >
                   Remove all
                 </button>
@@ -127,7 +126,7 @@ const Cart = ({ cartItems, setCartItems, clearCart }) => {
                           {new Intl.NumberFormat("en-US", {
                             style: "currency",
                             currency: "USD",
-                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0,
                           }).format(item.price)}
                         </p>
                       </div>
@@ -163,6 +162,7 @@ const Cart = ({ cartItems, setCartItems, clearCart }) => {
                     {new Intl.NumberFormat("en-US", {
                       style: "currency",
                       currency: "USD",
+                      maximumFractionDigits: 0,
                     }).format(calculateTotal())}
                   </p>
                 </div>

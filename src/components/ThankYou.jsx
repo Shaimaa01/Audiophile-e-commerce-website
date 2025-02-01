@@ -1,0 +1,88 @@
+/* eslint-disable react/prop-types */
+import confirmationIcon from "/public/assets/checkout/icon-order-confirmation.svg";
+import { useNavigate } from "react-router-dom";
+
+function ThankYou({ isSubmitted, cartItems, formatCurrency, grandTotal }) {
+  const navigate = useNavigate();
+  return (
+    <>
+      {isSubmitted && (
+        <div>
+          <div className="cart-overlay fixed top-0 left-0 w-full h-full bg-black opacity-40 z-40"></div>
+          <div className="absolute w-[540px] h-[581px] bg-white top-[222px] left-1/2 transform -translate-x-1/2  z-50 rounded-[8px] p-[48px]">
+            <img
+              src={confirmationIcon}
+              alt="confirmation icon "
+              className="w-[64px] h-[64px]"
+            />
+            <h2 className="text-black font-bold text-[32px] tracking-[1.14px] leading-[36px] mt-[33px] ">
+              THANK YOU
+              <br /> FOR YOUR ORDER
+            </h2>
+            <p className="my-[24px] text-black font-medium text-[15px] tracking-0 opacity-50 ">
+              You will receive an email confirmation shortly.
+            </p>
+            <div className="flex ">
+              {/* Product details */}
+              <div className="flex-1 h-[140px] bg-light-gray p-[24px] rounded-tl-[8px] rounded-bl-[8px]">
+                {/* img + price + quantity */}
+                <div className="flex justify-between border-b border-black border-opacity-[8%] pb-[12px]">
+                  {/* img + price */}
+                  <div className="flex items-center   ">
+                    <img
+                      src={cartItems[0].image.desktop}
+                      alt={cartItems[0].name}
+                      className="w-[50px] h-[50px] rounded-[8px] mr-[16px]"
+                    />
+
+                    <div>
+                      <h2 className="font-bold text-[15px] text-black tracking-0 leading-[25px]">
+                        {cartItems[0].name.split(" ")[0]}
+                      </h2>
+                      <p className="text-black font-bold text-[14px] tracking-0 opacity-[50%] leading-[25px]">
+                        {formatCurrency(cartItems[0].price)}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* quantity */}
+                  <p className="text-black font-bold text-[15px] tracking-0 opacity-50 ">
+                    x{cartItems[0].quantity}
+                  </p>
+                </div>
+                {cartItems.length > 1 && (
+                  <p className="font-bold text-[12px] text-center opacity-50 mt-[12px]  ">
+                    and {cartItems.length - 1} other item(s)
+                  </p>
+                )}
+              </div>
+
+              {/* GRAND TOTAL */}
+              <div className=" w-[198px] h-[140px] bg-black flex flex-col  gap-[8px] justify-center pl-[32px] rounded-tr-[8px] rounded-br-[8px] ">
+                <h3 className="uppercase font-medium text-white text-[15px] tracking-0 opacity-50">
+                  GRAND TOTAL
+                </h3>
+                <p className="font-bold text-[18px] text-white tracking-0">
+                  {formatCurrency(grandTotal)}
+                </p>
+              </div>
+            </div>
+
+            {/*  button */}
+            <button
+              onClick={() => {
+                navigate(`/`);
+                window.scrollTo({ top: 0 });
+              }}
+              className=" w-full h-[48px] bg-burnt-orange hover:bg-peach text-white  font-medium text-[13px] tracking-[1px] uppercase mt-[46px]"
+            >
+              BACK TO HOME
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+export default ThankYou;

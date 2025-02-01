@@ -83,7 +83,10 @@ function App() {
               />
             }
           />
-          <Route path="/check-out" element={<CheckOutPage/>} />
+          <Route
+            path="/check-out"
+            element={<CheckOutPage cartItems={cartItems} />}
+          />
         </Routes>
       </Router>
     </>

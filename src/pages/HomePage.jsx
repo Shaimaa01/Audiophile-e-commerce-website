@@ -75,7 +75,7 @@ const HomePage = () => {
             Upgrade to premium speakers that are phenomenally built to deliver
             truly remarkable sound.
           </p>
-          <button className="mt-[40px] w-[160px] h-[48px] bg-black text-center font-bold text-[13px] tracking-[1px] text-white uppercase py-[15px] z-10 relative hover:bg-light-gray hover:text-black border border-black">
+          <button className="mt-[40px] w-[160px] h-[48px] bg-black text-center font-bold text-[13px] tracking-[1px] text-white uppercase py-[15px] z-10 relative hover:bg-[#4C4C4C]">
             See Product
           </button>
         </div>

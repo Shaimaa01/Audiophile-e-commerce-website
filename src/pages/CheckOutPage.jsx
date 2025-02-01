@@ -1,8 +1,15 @@
+/* eslint-disable react/prop-types */
 import GoBackButton from "../components/GoBackButton";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import Footer from "../components/Footer";
+import OrderSummry from "../components/OrderSummry";
+import { useState } from "react";
+import ThankYou from "../components/ThankYou";
+import Cash from "/public/assets/checkout/icon-cash-on-delivery.svg";
 
-function CheckOutPage() {
+function CheckOutPage({ cartItems }) {
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const initialValues = {
     name: "",
     email: "",
@@ -49,26 +56,50 @@ function CheckOutPage() {
       .matches(/^[a-zA-Z\s'-.]+$/, "Country name contains invalid characters")
       .required("Country is required"),
     paymentMethod: Yup.string().required("PaymentMethod is required"),
-    eMoneyNumber: Yup.string()
-      .matches(
-        /^[a-zA-Z0-9]+$/,
-        "e-Money number should contain only letters and numbers"
-      )
-      .required("e-Money number is required "),
-    eMoneyPIN: Yup.string()
-      .length(4, "e-Money PIN must be exactly 4 digits")
-      .matches(/^\d{4}$/, "e-Money PIN must be numeric")
-      .required("e-Money PIN is required "),
+    eMoneyNumber: Yup.string().when("paymentMethod", {
+      is: "e-Money",
+      then: (schema) =>
+        schema
+          .matches(
+            /^[a-zA-Z0-9]+$/,
+            "e-Money number should contain only letters and numbers"
+          )
+          .required("e-Money number is required"),
+      otherwise: (schema) => schema,
+    }),
+    eMoneyPIN: Yup.string().when("paymentMethod", {
+      is: "e-Money",
+      then: (schema) =>
+        schema
+          .required("e-Money PIN is required")
+          .length(4, "e-Money PIN must be exactly 4 digits")
+          .matches(/^\d{4}$/, "e-Money PIN must be numeric"),
+      otherwise: (schema) => schema,
+    }),
   });
 
-  const handleSubmit = (values, { resetForm }) => {
-    alert("Form submitted successfully!");
-    console.log(values);
-    resetForm();
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0,
+    }).format(amount);
   };
 
+  const calculateTotal = () => {
+    const productTotal = cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+    return productTotal;
+  };
+
+  const shipping = 50;
+  const vat = calculateTotal() * 0.2;
+  const grandTotal = calculateTotal() + shipping;
+
   return (
-    <div className="">
+    <div className="relative">
       {/* Header */}
       <div className="bg-black h-[97px] "></div>
 
@@ -79,231 +110,420 @@ function CheckOutPage() {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={handleSubmit}
+          onSubmit={(values, { resetForm }) => {
+            console.log("Form submitted:", values);
+            resetForm();
+            setIsSubmitted(true);
+            window.scrollTo({ top: 200 });
+          }}
         >
-          {({ values }) => (
-            <Form noValidate>
-              <div className="flex justify-between px-[165px] pb-[160px]">
-                {/* check out form   */}
-                <div className="w-[730px] py-[54px] px-[48px] bg-white">
-                  <h2 className="text-black tracking-[1.14px] font-bold text-[32px]">
-                    CHECKOUT
-                  </h2>
-                  {/* Billing Details */}
-                  <h3 className="pt-[41px]  uppercase text-burnt-orange font-bold text-[13px] tracking-[0.93px]">
-                    Billing Details
-                  </h3>
-                  <div className="flex justify-between flex-wrap">
-                    {/* name */}
-                    <div className="flex flex-col">
-                      <label className="text-black font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px]">
-                        Name
-                      </label>
-                      <Field
-                        type="text"
-                        name="name"
-                        placeholder="Alexei Ward"
-                        className="border border-silver-gray rounded-[8px] w-[309px] h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] "
-                      />
-                      <ErrorMessage name="name" component="p" />
-                    </div>
-
-                    {/* email */}
-                    <div className="flex flex-col">
-                      <label className="text-black font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px]">
-                        Email Address
-                      </label>
-                      <Field
-                        type="email"
-                        name="email"
-                        placeholder="alexei@mail.com"
-                        className="border border-silver-gray rounded-[8px] w-[309px] h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] "
-                      />
-                      <ErrorMessage name="email" component="p" />
-                    </div>
-
-                    {/* phone */}
-                    <div className="flex flex-col">
-                      <label className="text-black font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px]">
-                        Phone Number
-                      </label>
-                      <Field
-                        type="tel"
-                        name="phone"
-                        placeholder="+1 202-555-0136"
-                        className="border border-silver-gray rounded-[8px] w-[309px] h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] "
-                      />
-                      <ErrorMessage name="phone" component="p" />
-                    </div>
-                  </div>
-                  {/* shipping info */}
-                  <h3 className="pt-[41px]  uppercase text-burnt-orange font-bold text-[13px] tracking-[0.93px]">
-                    shipping info
-                  </h3>
-                  <div className="flex justify-between flex-wrap">
-                    {/* address */}
-                    <div className="flex flex-col w-full">
-                      <label className="text-black font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px]">
-                        Address
-                      </label>
-                      <Field
-                        type="text"
-                        name="address"
-                        placeholder="1137 Williams Avenue"
-                        className="border border-silver-gray rounded-[8px] w-full h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] "
-                      />
-                      <ErrorMessage name="address" component="p" />
-                    </div>
-
-                    {/* ZIP Code */}
-                    <div className="flex flex-col ">
-                      <label className="text-black font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px]">
-                        ZIP Code
-                      </label>
-                      <Field
-                        type="text"
-                        name="zip"
-                        placeholder="10001"
-                        className="border border-silver-gray rounded-[8px]  w-[309px]  h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] "
-                      />
-                      <ErrorMessage name="zip" component="p" />
-                    </div>
-
-                    {/* City */}
-                    <div className="flex flex-col ">
-                      <label className="text-black font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px]">
-                        City
-                      </label>
-                      <Field
-                        type="text"
-                        name="city"
-                        placeholder="1New York"
-                        className="border border-silver-gray rounded-[8px]  w-[309px]  h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] "
-                      />
-                      <ErrorMessage name="city" component="p" />
-                    </div>
-
-                    {/* Country */}
-                    <div className="flex flex-col ">
-                      <label className="text-black font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px]">
-                        Country
-                      </label>
-                      <Field
-                        type="text"
-                        name="country"
-                        placeholder="United States"
-                        className="border border-silver-gray rounded-[8px]  w-[309px]  h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] "
-                      />
-                      <ErrorMessage name="country" component="p" />
-                    </div>
-                  </div>
-                  {/* payment details */}
-                  <h3 className="pt-[41px]  uppercase text-burnt-orange font-bold text-[13px] tracking-[0.93px]">
-                    payment details
-                  </h3>
-                  <div>
-                    {/* Payment Method */}
-                    <div
-                      role="group"
-                      aria-labelledby="payment-method"
-                      className="flex justify-between mt-[16px]"
-                    >
-                      <h4 className="text-black font-bold text-[12px] tracking-[-0.21px] mb-[9px] ">
-                        Payment Method
-                      </h4>
-                      <div className="flex flex-col gap-[16px]">
-                        {/* e-mony */}
-                        <div
-                          className={`border rounded-[8px] w-[309px] h-[56px] pl-[21px] flex items-center gap-[16px]  ${
-                            values.paymentMethod === "e-Money"
-                              ? "border-burnt-orange"
-                              : "border-silver-gray"
+          {({ handleSubmit, isValid, errors, touched, values }) => {
+            // Add isValid, errors, and touched
+            console.log("Form is valid:", isValid);
+            console.log("Form errors:", errors);
+            console.log("Touched fields:", touched);
+            console.log("Form values:", values);
+            return (
+              <Form noValidate onSubmit={handleSubmit}>
+                <div className="flex justify-between px-[160px] pb-[160px] ">
+                  {/* check out form   */}
+                  <div className="w-[730px] py-[54px] px-[48px] bg-white rounded-[8px]">
+                    <h2 className="text-black tracking-[1.14px] font-bold text-[32px]">
+                      CHECKOUT
+                    </h2>
+                    {/* Billing Details */}
+                    <h3 className="pt-[41px]  uppercase text-burnt-orange font-bold text-[13px] tracking-[0.93px]">
+                      Billing Details
+                    </h3>
+                    <div className="flex justify-between flex-wrap">
+                      {/* name */}
+                      <div className="flex flex-col">
+                        <label
+                          htmlFor="name"
+                          className={` font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px] ${
+                            errors.name && touched.name
+                              ? "text-red"
+                              : "text-black"
                           }`}
                         >
-                          <Field
-                            id="e-Money"
-                            type="radio"
-                            name="paymentMethod"
-                            value="e-Money"
-                            className="appearance-none cursor-pointer w-[20px] h-[20px] border border-silver-gray rounded-full checked:before:bg-burnt-orange relative before:content-[''] before:w-[10px] before:h-[10px]  before:rounded-full before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 "
-                          />
-                          <label
-                            htmlFor="e-Money"
-                            className="cursor-pointer text-black font-bold text-[14px] tracking-[-0.25px]"
-                          >
-                            e-Money
-                          </label>
-                        </div>
-
-                        {/* Cash on Delivery */}
-                        <div
-                          className={`border rounded-[8px] w-[309px] h-[56px] pl-[21px] flex items-center gap-[16px] cursor-pointer ${
-                            values.paymentMethod === "Cash on Delivery"
-                              ? "border-burnt-orange"
-                              : "border-silver-gray"
+                          Name
+                        </label>
+                        <Field
+                          id="name"
+                          autoComplete="name"
+                          type="text"
+                          name="name"
+                          placeholder="Alexei Ward"
+                          className={`focus:outline-none caret-burnt-orange ${
+                            errors.name && touched.name
+                              ? "border-2 border-red focus:border-red"
+                              : "border-silver-gray focus:border-burnt-orange"
+                          } border rounded-[8px] w-[309px] h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
+                        />
+                        <ErrorMessage
+                          name="name"
+                          component="p"
+                          className="text-red font-medium text-[12px] tracking-[-0.21px] mt-[4px]"
+                        />
+                      </div>
+                      {/* email */}
+                      <div className="flex flex-col">
+                        <label
+                          htmlFor="email"
+                          className={` font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px] ${
+                            errors.email && touched.email
+                              ? "text-red"
+                              : "text-black"
                           }`}
                         >
-                          <Field
-                            id="cash"
-                            type="radio"
-                            name="paymentMethod"
-                            value="Cash on Delivery"
-                            className="appearance-none cursor-pointer w-[20px] h-[20px] border border-silver-gray rounded-full checked:before:bg-burnt-orange relative before:content-[''] before:w-[10px] before:h-[10px]  before:rounded-full before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 "
-                          />
-                          <label
-                            htmlFor="cash"
-                            className="cursor-pointer text-black font-bold text-[14px] tracking-[-0.25px]"
-                          >
-                            Cash on Delivery
-                          </label>
-                        </div>
+                          Email Address
+                        </label>
+                        <Field
+                          id="email"
+                          autoComplete="email"
+                          type="email"
+                          name="email"
+                          placeholder="alexei@mail.com"
+                          className={`focus:outline-none caret-burnt-orange ${
+                            errors.email && touched.email
+                              ? "border-2 border-red focus:border-red"
+                              : "border-silver-gray focus:border-burnt-orange"
+                          } border rounded-[8px] w-[309px] h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
+                        />
+                        <ErrorMessage
+                          name="email"
+                          component="p"
+                          className="text-red font-medium text-[12px] tracking-[-0.21px] mt-[4px]"
+                        />
+                      </div>
+                      {/* phone */}
+                      <div className="flex flex-col">
+                        <label
+                          htmlFor="phone"
+                          className={` font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px] ${
+                            errors.phone && touched.phone
+                              ? "text-red"
+                              : "text-black"
+                          }`}
+                        >
+                          Phone Number
+                        </label>
+                        <Field
+                          id="phone"
+                          autoComplete="tel"
+                          type="tel"
+                          name="phone"
+                          placeholder="+1 202-555-0136"
+                          className={`focus:outline-none caret-burnt-orange ${
+                            errors.phone && touched.phone
+                              ? "border-2 border-red focus:border-red"
+                              : "border-silver-gray focus:border-burnt-orange"
+                          } border rounded-[8px] w-[309px] h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
+                        />
+                        <ErrorMessage
+                          name="phone"
+                          component="p"
+                          className="text-red font-medium text-[12px] tracking-[-0.21px] mt-[4px]"
+                        />
                       </div>
                     </div>
+                    {/* shipping info */}
+                    <h3 className="pt-[41px]  uppercase text-burnt-orange font-bold text-[13px] tracking-[0.93px]">
+                      shipping info
+                    </h3>
+                    <div className="flex justify-between flex-wrap">
+                      {/* address */}
+                      <div className="flex flex-col w-full">
+                        <label
+                          htmlFor="address"
+                          className={` font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px] ${
+                            errors.address && touched.address
+                              ? "text-red"
+                              : "text-black"
+                          }`}
+                        >
+                          Address
+                        </label>
+                        <Field
+                          id="address"
+                          autoComplete="street-address"
+                          type="text"
+                          name="address"
+                          placeholder="1137 Williams Avenue"
+                          className={`focus:outline-none caret-burnt-orange ${
+                            errors.address && touched.address
+                              ? "border-2 border-red focus:border-red"
+                              : "border-silver-gray focus:border-burnt-orange"
+                          } border rounded-[8px] w-[309px] h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
+                        />
+                        <ErrorMessage
+                          name="address"
+                          component="p"
+                          className="text-red font-medium text-[12px] tracking-[-0.21px] mt-[4px]"
+                        />
+                      </div>
 
-                    {/* Conditional e-Money fields */}
-                    {values.paymentMethod === "e-Money" && (
-                      <div className="flex justify-between flex-wrap pt-[16px]">
-                        {/* e-Money Number */}
-                        <div className="flex flex-col">
-                          <label className="text-black font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px]">
-                            e-Money Number
-                          </label>
-                          <Field
-                            type="text"
-                            name="eMoneyNumber"
-                            placeholder="238521993"
-                            className="border border-silver-gray rounded-[8px] w-[309px] h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] "
-                          />
-                          <ErrorMessage name="eMoneyNumber" component="p" />
-                        </div>
+                      {/* ZIP Code */}
+                      <div className="flex flex-col ">
+                        <label
+                          htmlFor="zip"
+                          className={` font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px] ${
+                            errors.zip && touched.zip
+                              ? "text-red"
+                              : "text-black"
+                          }`}
+                        >
+                          ZIP Code
+                        </label>
+                        <Field
+                          id="zip"
+                          autoComplete="postal-code"
+                          type="text"
+                          name="zip"
+                          placeholder="10001"
+                          className={`focus:outline-none caret-burnt-orange ${
+                            errors.zip && touched.zip
+                              ? "border-2 border-red focus:border-red"
+                              : "border-silver-gray focus:border-burnt-orange"
+                          } border rounded-[8px] w-[309px] h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
+                        />
+                        <ErrorMessage
+                          name="zip"
+                          component="p"
+                          className="text-red font-medium text-[12px] tracking-[-0.21px] mt-[4px]"
+                        />
+                      </div>
 
-                        {/* e-Money PIN */}
-                        <div className="flex flex-col">
-                          <label className="text-black font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px]">
-                            e-Money PIN
-                          </label>
-                          <Field
-                            type="password"
-                            name="eMoneyPIN"
-                            placeholder="6891"
-                            className="border border-silver-gray rounded-[8px] w-[309px] h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] "
-                          />
-                          <ErrorMessage name="eMoneyPIN" component="p" />
+                      {/* City */}
+                      <div className="flex flex-col ">
+                        <label
+                          htmlFor="city"
+                          className={` font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px] ${
+                            errors.city && touched.city
+                              ? "text-red"
+                              : "text-black"
+                          }`}
+                        >
+                          City
+                        </label>
+                        <Field
+                          id="city"
+                          autoComplete="address-level2"
+                          type="text"
+                          name="city"
+                          placeholder="1New York"
+                          className={`focus:outline-none caret-burnt-orange ${
+                            errors.city && touched.city
+                              ? "border-2 border-red focus:border-red"
+                              : "border-silver-gray focus:border-burnt-orange"
+                          } border rounded-[8px] w-[309px] h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
+                        />
+                        <ErrorMessage
+                          name="city"
+                          component="p"
+                          className="text-red font-medium text-[12px] tracking-[-0.21px] mt-[4px]"
+                        />
+                      </div>
+
+                      {/* Country */}
+                      <div className="flex flex-col ">
+                        <label
+                          htmlFor="country"
+                          className={` font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px] ${
+                            errors.country && touched.country
+                              ? "text-red"
+                              : "text-black"
+                          }`}
+                        >
+                          Country
+                        </label>
+                        <Field
+                          id="country"
+                          autoComplete="country"
+                          type="text"
+                          name="country"
+                          placeholder="United States"
+                          className={`focus:outline-none caret-burnt-orange ${
+                            errors.country && touched.country
+                              ? "border-2 border-red focus:border-red"
+                              : "border-silver-gray focus:border-burnt-orange"
+                          } border rounded-[8px] w-[309px] h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
+                        />
+                        <ErrorMessage
+                          name="country"
+                          component="p"
+                          className="text-red font-medium text-[12px] tracking-[-0.21px] mt-[4px]"
+                        />
+                      </div>
+                    </div>
+                    {/* payment details */}
+                    <h3 className="pt-[41px]  uppercase text-burnt-orange font-bold text-[13px] tracking-[0.93px]">
+                      payment details
+                    </h3>
+                    <div>
+                      {/* Payment Method */}
+                      <div
+                        role="group"
+                        aria-labelledby="payment-method"
+                        className="flex justify-between mt-[16px]"
+                      >
+                        <h4 className="text-black font-bold text-[12px] tracking-[-0.21px] mb-[9px] ">
+                          Payment Method
+                        </h4>
+                        <div className="flex flex-col gap-[16px]">
+                          {/* e-mony */}
+                          <div
+                            className={`hover:border-burnt-orange border rounded-[8px] w-[309px] h-[56px] pl-[21px] flex items-center gap-[16px]  ${
+                              values.paymentMethod === "e-Money"
+                                ? "border-burnt-orange"
+                                : "border-silver-gray"
+                            }`}
+                          >
+                            <Field
+                              id="e-Money"
+                              autoComplete="cc-number"
+                              type="radio"
+                              name="paymentMethod"
+                              value="e-Money"
+                              className="appearance-none cursor-pointer w-[20px] h-[20px] border border-silver-gray rounded-full checked:before:bg-burnt-orange relative before:content-[''] before:w-[10px] before:h-[10px]  before:rounded-full before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 "
+                            />
+                            <label
+                              htmlFor="e-Money"
+                              className={` font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px]  text-black cursor-pointer`}
+                            >
+                              e-Money
+                            </label>
+                          </div>
+
+                          {/* Cash on Delivery */}
+                          <div
+                            className={`hover:border-burnt-orange border rounded-[8px] w-[309px] h-[56px] pl-[21px] flex items-center gap-[16px] cursor-pointer ${
+                              values.paymentMethod === "Cash on Delivery"
+                                ? "border-burnt-orange"
+                                : "border-silver-gray"
+                            }`}
+                          >
+                            <Field
+                              id="cash"
+                              autoComplete="off"
+                              type="radio"
+                              name="paymentMethod"
+                              value="Cash on Delivery"
+                              className="appearance-none cursor-pointer w-[20px] h-[20px] border border-silver-gray rounded-full checked:before:bg-burnt-orange relative before:content-[''] before:w-[10px] before:h-[10px]  before:rounded-full before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 "
+                            />
+                            <label
+                              htmlFor="cash"
+                              className={` font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px]  text-black cursor-pointer`}
+                            >
+                              Cash on Delivery
+                            </label>
+                          </div>
                         </div>
                       </div>
-                    )}
-                  </div>
-                </div>
 
-                {/* summry */}
-                <div className="w-[350px]  bg-white">
-                  <button type="submit">Submit</button>
+                      {/* Conditional e-Money fields */}
+                      {values.paymentMethod === "e-Money" && (
+                        <div className="flex justify-between flex-wrap pt-[16px]">
+                          {/* e-Money Number */}
+                          <div className="flex flex-col">
+                            <label
+                              htmlFor="eMoneyNumber"
+                              className={` font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px] ${
+                                errors.eMoneyNumber && touched.eMoneyNumber
+                                  ? "text-red"
+                                  : "text-black"
+                              }`}
+                            >
+                              e-Money Number
+                            </label>
+                            <Field
+                              id="eMoneyNumber"
+                              autoComplete="cc-number"
+                              type="text"
+                              name="eMoneyNumber"
+                              placeholder="238521993"
+                              className={`focus:outline-none caret-burnt-orange ${
+                                errors.eMoneyNumber && touched.eMoneyNumber
+                                  ? "border-2 border-red focus:border-red"
+                                  : "border-silver-gray focus:border-burnt-orange"
+                              } border rounded-[8px] w-[309px] h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
+                            />
+                            <ErrorMessage
+                              name="eMoneyNumber"
+                              component="p"
+                              className="text-red font-medium text-[12px] tracking-[-0.21px] mt-[4px]"
+                            />
+                          </div>
+
+                          {/* e-Money PIN */}
+                          <div className="flex flex-col">
+                            <label
+                              htmlFor="eMoneyPIN"
+                              className={` font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px] ${
+                                errors.eMoneyPIN && touched.eMoneyPIN
+                                  ? "text-red"
+                                  : "text-black"
+                              }`}
+                            >
+                              e-Money PIN
+                            </label>
+                            <Field
+                              id="eMoneyPIN"
+                              autoComplete="off"
+                              type="password"
+                              name="eMoneyPIN"
+                              placeholder="6891"
+                              className={`focus:outline-none caret-burnt-orange ${
+                                errors.eMoneyPIN && touched.eMoneyPIN
+                                  ? "border-2 border-red focus:border-red"
+                                  : "border-silver-gray focus:border-burnt-orange"
+                              } border rounded-[8px] w-[309px] h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
+                            />
+                            <ErrorMessage
+                              name="eMoneyPIN"
+                              component="p"
+                              className="text-red font-medium text-[12px] tracking-[-0.21px] mt-[4px]"
+                            />
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Conditional Cash on Delivery */}
+                      {values.paymentMethod === "Cash on Delivery" && (
+                       <div className="flex justify-between items-center gap-[32px] mt-[30px]">
+                        <img src={Cash} alt=" icon cash on deilvery" className="w-[48px] h-[48px]"/>
+                        <p className="text-black tracking-0 leading-[25px] font-medium text-[15px] opacity-50">The ‘Cash on Delivery’ option enables you to pay in cash when our delivery courier arrives at your residence. Just make sure your address is correct so that your order will not be cancelled.</p>
+                       </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* summry */}
+                  <OrderSummry
+                    cartItems={cartItems}
+                    formatCurrency={formatCurrency}
+                    calculateTotal={calculateTotal}
+                    shipping={shipping}
+                    vat={vat}
+                    grandTotal={grandTotal}
+                  />
                 </div>
-              </div>
-            </Form>
-          )}
+              </Form>
+            );
+          }}
         </Formik>
       </div>
+
+      <Footer />
+
+      {/* ThankYou */}
+      <ThankYou
+        isSubmitted={isSubmitted}
+        cartItems={cartItems}
+        formatCurrency={formatCurrency}
+        calculateTotal={calculateTotal}
+        grandTotal={grandTotal}
+      />
     </div>
   );
 }
