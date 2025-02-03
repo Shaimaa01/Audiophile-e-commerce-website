@@ -2,18 +2,32 @@
 import Logo from "./Logo";
 import Navigation from "./Navigation";
 import Cart from "./Cart";
+import hamburger from "/public/assets/shared/tablet/icon-hamburger.svg";
 
-const Header = ({ cartItems, clearCart , setCartItems }) => {
+const Header = ({ cartItems, clearCart, setCartItems }) => {
   return (
-    <header className="flex justify-between items-center text-white h-[96px]  absolute w-[calc(100%-330px)] left-[165px] z-10" >
+    <header className="flex justify-between items-center text-white xl:h-[96px] max-xl:h-[90px]  absolute xl:w-[calc(100%-330px)] max-xl:w-[calc(100%-78px)] xl:left-[165px] max-xl:left-[39px] z-10">
       {/* Logo */}
-      <Logo />
+      <div className="flex justify-center items-center max-xl:gap-[42px]">
+        <img
+          src={hamburger}
+          alt="hamburger icon"
+          className="xl:hidden w-[16px] h-[15px]"
+        />
+        <Logo />
+      </div>
 
       {/* Navigation Links */}
-      <Navigation />
+      <div className="max-xl:hidden">
+        <Navigation />
+      </div>
 
       {/* Cart */}
-      <Cart cartItems={cartItems} clearCart={clearCart} setCartItems={setCartItems} />
+      <Cart
+        cartItems={cartItems}
+        clearCart={clearCart}
+        setCartItems={setCartItems}
+      />
     </header>
   );
 };

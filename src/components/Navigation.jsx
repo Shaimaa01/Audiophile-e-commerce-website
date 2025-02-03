@@ -5,15 +5,16 @@ const Navigation = () => {
 
   return (
     <nav>
-      <ul className="flex uppercase gap-[34px] font-bold text-[13px] tracking-[2px]">
+      <ul className="flex uppercase gap-[34px] font-bold text-[13px] tracking-[2px] ">
         <li>
           <Link
             to="/"
             className={`transition-colors ${
-              location.pathname === "/"
-                ? "text-burnt-orange"
-                : ""
+              location.pathname === "/" ? "text-burnt-orange" : ""
             }`}
+            onClick={() => {
+              window.scrollTo({ top: 0 });
+            }}
           >
             Home
           </Link>
@@ -22,10 +23,11 @@ const Navigation = () => {
           <Link
             to="/headphones"
             className={`transition-colors ${
-              location.pathname === "/headphones"
-                ? "text-burnt-orange"
-                : ""
+              location.pathname === "/headphones" ? "text-burnt-orange" : ""
             }`}
+            onClick={() => {
+              window.scrollTo({ top: 0 });
+            }}
           >
             Headphones
           </Link>
@@ -34,10 +36,11 @@ const Navigation = () => {
           <Link
             to="/speakers"
             className={`transition-colors ${
-              location.pathname === "/speakers"
-                ? "text-burnt-orange"
-                : ""
+              location.pathname === "/speakers" ? "text-burnt-orange" : ""
             }`}
+            onClick={() => {
+              window.scrollTo({ top: 0 });
+            }}
           >
             Speakers
           </Link>
@@ -46,10 +49,11 @@ const Navigation = () => {
           <Link
             to="/earphones"
             className={`transition-colors ${
-              location.pathname === "/earphones"
-                ? "text-burnt-orange"
-                : ""
+              location.pathname === "/earphones" ? "text-burnt-orange" : ""
             }`}
+            onClick={() => {
+              window.scrollTo({ top: 0 });
+            }}
           >
             Earphones
           </Link>

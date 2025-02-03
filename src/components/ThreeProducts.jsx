@@ -11,14 +11,14 @@ function ThreeProducts() {
   const yx1_earphones = data.find((item) => item.id === 1);
 
   return (
-    <div className="mx-[165px] pt-[80px] my-[160px]">
-      <div className="flex justify-between items-center w-full">
-        <div className=" w-[350px]  h-[204px] bg-light-gray relative pt-[80px] text-center rounded-lg  ">
+    <div className="xl:mx-[165px] md:mx-[39px] xl:pt-[80px] md:pt-[60px] xl:my-[160px] md:my-[96px]  ">
+      <div className="flex xl:justify-between md:justify-center items-center w-full gap-[10px] ">
+        <div className=" lg:w-[350px] md:w-[223px]  lg:h-[204px] md:h-[165px] bg-light-gray relative lg:pt-[80px] md:pt-[45px] text-center rounded-lg  ">
           <img
             src={headphone}
-            className=" w-[218px] h-[210px] absolute -top-[80px] left-[50%] -translate-x-[50%] "
+            className=" lg:w-[218px] md:w-[134.9pxpx] lg:h-[214px] md:h-[141px] absolute lg:-top-[80px] md:-top-[55px] left-[50%] -translate-x-[50%] "
           />
-          <p className="text-black pt-[35px] font-bold text-[18px] uppercase tracking-[1.29px]">
+          <p className="text-black pt-[35px] font-bold lg:text-[18px] md:text-[15px] uppercase lg:tracking-[1.29px] md:tracking-[1.07px]">
             {xx99_mark_one_headphones.category}
           </p>
 
@@ -35,12 +35,12 @@ function ThreeProducts() {
           </Link>
         </div>
 
-        <div className=" w-[350px]  h-[204px] bg-light-gray relative pt-[80px] text-center rounded-lg  ">
+        <div className=" lg:w-[350px] md:w-[223px] lg:h-[204px] md:h-[165px] bg-light-gray relative lg:pt-[80px] md:pt-[45px] text-center rounded-lg  ">
           <img
             src={speakers}
-            className=" w-[216px] h-[201px] absolute -top-[72.5px] left-[50%] -translate-x-[50%] "
+            className=" lg:w-[216px] md:w-[134.9pxpx] lg:h-[201px] md:h-[141px] absolute lg:-top-[72.5px] md:-top-[55px] left-[50%] -translate-x-[50%] "
           />
-          <p className="text-black pt-[35px] font-bold text-[18px] uppercase tracking-[1.29px]">
+          <p className="text-black pt-[35px] font-bold lg:text-[18px] md:text-[15px] uppercase lg:tracking-[1.29px] md:tracking-[1.07px]">
             {zx9_speaker.category}
           </p>
 
@@ -57,12 +57,12 @@ function ThreeProducts() {
           </Link>
         </div>
 
-        <div className=" w-[350px]  h-[204px] bg-light-gray relative pt-[80px] text-center rounded-lg  ">
+        <div className=" lg:w-[350px] md:w-[223px] lg:h-[204px] md:h-[165px] bg-light-gray relative lg:pt-[80px] md:pt-[45px] text-center rounded-lg  ">
           <img
             src={earphone}
-            className=" w-[216px] h-[187px] absolute -top-[59px] left-[50%] -translate-x-[50%] "
+            className=" lg:w-[216px] md:w-[134.9pxpx] lg:h-[187px] md:h-[141px]  absolute lg:-top-[59px] md:-top-[55px] left-[50%] -translate-x-[50%] "
           />
-          <p className="text-black pt-[35px] font-bold text-[18px] uppercase tracking-[1.29px]">
+          <p className="text-black pt-[35px] font-bold lg:text-[18px] md:text-[15px] uppercase lg:tracking-[1.29px] md:tracking-[1.07px]">
             {yx1_earphones.category}
           </p>
 

@@ -1,10 +1,18 @@
 import man from "/public/assets/home/desktop/Bitmap.svg";
+import manTablet from "/public/assets/shared/tablet/image-best-gear.jpg";
+import manMobile from "/public/assets/shared/mobile/image-best-gear.jpg";
 
 function Man() {
   return (
-    <div className=" mx-[165px] my-[160px] h-[588px] flex justify-between items-center">
-      <div className="w-[445px] h-[295px]">
-        <h2 className="text-black leading-[44px] tracking-[1.43px] font-bold text-[40px] uppercase">
+    <div className=" xl:mx-[165px] max-xl:mx-[39px] xl:my-[160px] max-xl:my-[96px] xl:h-[588px] flex justify-between items-center max-xl:gap-[20px] max-md:gap-[63px] max-md:flex-col ">
+      <img
+        src={manTablet}
+        alt="man wearing headphone black"
+        className="w-full  md:hidden rounded-[8px]"
+      />
+
+      <div className="xl:w-[445px] xl:h-[295px] max-md:text-center">
+        <h2 className="text-black leading-[44px] tracking-[1.43px] font-bold text-[40px] uppercase max-xl:text-[30px] max-md:text-[40px]">
           Bringing you the <span className="text-burnt-orange">best</span> audio
           gear
         </h2>
@@ -21,7 +29,7 @@ function Man() {
       <img
         src={man}
         alt="man wearing headphone black"
-        className="w-[540px] h-[588px]"
+        className=" xl:w-[540px] xl:h-[588px] max-xl:w-1/2 max-md:hidden"
       />
     </div>
   );

@@ -22,19 +22,24 @@ const ProductDetails = ({ addToCart, increment, decrement, count }) => {
   return (
     <div className="">
       {/* Header */}
-      <div className="bg-black h-[97px] "></div>
+      <div className="bg-black  xl:h-[96px] max-xl:h-[90px]  "></div>
 
       {/* product container */}
       <div className=" bg-off-white">
         <GoBackButton />
 
         {/* Product Image +  product details  */}
-        <div className="flex gap-[124.5px] justify-center items-center h-[560px] px-[165px] ">
+        <div className="flex xl:gap-[124.5px] max-xl:gap-[69px] justify-center items-center h-[560px] px-[165px] ">
           {/* Product Image */}
           <img
             src={product.image.desktop}
             alt={product.name}
-            className="w-[540px] h-full rounded-md "
+            className="xl:w-[540px] xl:h-full max-xl:w-full max-xl:h-full rounded-md max-lg:hidden"
+          />
+          <img
+            src={product.image.tablet}
+            alt={product.name}
+            className="w-full h-full rounded-md lg:hidden"
           />
 
           {/* product details */}
@@ -87,35 +92,70 @@ const ProductDetails = ({ addToCart, increment, decrement, count }) => {
         </div>
 
         {/* Features + in box */}
-        <div className="my-[160px] px-[165px] flex justify-between ">
+        <div className="xl:my-[160px] max-xl:my-[120px] xl:px-[165px] max-xl:px-[39px] flex justify-between max-lg:gap-[120px] max-lg:flex-col">
           <div>
             <h2 className="text-black tracking-[1.14px] leading-[36px] font-bold text-[32px] ">
               FEATURES
             </h2>
-            <p className="max-w-[635px] text-black opacity-50 tracking-0 leading-[25px] font-medium text-[15px] mt-[32px]">
+            <p className="lg:max-w-[635px] text-black opacity-50 tracking-0 leading-[25px] font-medium text-[15px] mt-[32px]">
               {product.features}
             </p>
           </div>
-          <div className="w-[350px]">
-            <h2 className="text-black leading-[36px] tracking-[1.14px] font-bold text-[32px] uppercase mb-[27px]">
+          <div className="lg:w-[350px] max-lg:flex max-lg:justify-between">
+            <h2 className="text-black leading-[36px] tracking-[1.14px] font-bold text-[32px] uppercase mb-[27px] max-lg:w-1/2 ">
               in the box
             </h2>
-            {product.includes.map((include, index) => (
-              <p
-                className=" py-[5px] text-black tracking-0  text-[15px]   "
-                key={index}
-              >
-                <span className="mr-[24px] text-burnt-orange  font-bold  opacity-100">
-                  {include.quantity}x
-                </span>
-                <span className="opacity-50 font-medium">{include.item}</span>
-              </p>
-            ))}
+            <div className="w-full max-lg:w-1/2">
+              {product.includes.map((include, index) => (
+                <p
+                  className=" py-[5px] text-black tracking-0  text-[15px]   "
+                  key={index}
+                >
+                  <span className="mr-[24px] text-burnt-orange  font-bold  opacity-100">
+                    {include.quantity}x
+                  </span>
+                  <span className="opacity-50 font-medium">{include.item}</span>
+                </p>
+              ))}
+            </div>
           </div>
         </div>
 
         {/* product photos */}
-        <div className=" h-[592px] my-[160px] px-[165px] flex justify-between gap-[30px]">
+
+        {/* desktop */}
+        <div className=" lg:h-[592px] max-lg:h-[368px] xl:my-[160px] max-xl:my-[120px] xl:px-[165px] max-xl:px-[39px] flex justify-between xl:gap-[30px] max-xl:gap-[18px]">
+          <div className="flex justify-between flex-col xl:gap-[30px] max-xl:gap-[18px]  max-xl:w-2/5">
+            <img
+              src={product.gallery.first.desktop}
+              className="rounded-[8px] xl:w-[445px] h-full max-lg:hidden  "
+            />
+            <img
+              src={product.gallery.first.tablet}
+              className="rounded-[8px] h-[174px]  lg:hidden  "
+            />
+
+            <img
+              src={product.gallery.second.desktop}
+              className="rounded-[8px] xl:w-[445px] h-full max-lg:hidden "
+            />
+            <img
+              src={product.gallery.second.tablet}
+              className="rounded-[8px] h-[174px] lg:hidden "
+            />
+          </div>
+          <img
+            src={product.gallery.third.desktop}
+            className="rounded-[8px] xl:w-[635px] xl:h-full max-xl:w-3/5 max-lg:hidden "
+          />
+          <img
+            src={product.gallery.third.tablet}
+            className="rounded-[8px] w-3/5 h-full  lg:hidden "
+          />
+        </div>
+
+        {/* tablet  */}
+        {/* <div className=" h-[592px] xl:my-[160px] xl:px-[165px] flex justify-between gap-[30px]">
           <div className="flex justify-between flex-col gap-[30px]">
             <img
               src={product.gallery.first.desktop}
@@ -130,7 +170,7 @@ const ProductDetails = ({ addToCart, increment, decrement, count }) => {
             src={product.gallery.third.desktop}
             className="rounded-[8px] w-[635px] h-full"
           />
-        </div>
+        </div> */}
 
         {/* you may also like */}
         <div className="my-[160px] px-[165px] text-center">
@@ -140,8 +180,14 @@ const ProductDetails = ({ addToCart, increment, decrement, count }) => {
           <div className="mt-[64px] h-[471px] flex gap-[30px]">
             {product.others.map((otherProduct, index) => (
               <div key={index}>
-                <img src={otherProduct.image.desktop} alt={otherProduct.name} className="rounded-[8px]" />
-                <h3 className="text-black tracking-[1.71px] font-bold text-[24px] mt-[40px] ">{otherProduct.name}</h3>
+                <img
+                  src={otherProduct.image.desktop}
+                  alt={otherProduct.name}
+                  className="rounded-[8px]"
+                />
+                <h3 className="text-black tracking-[1.71px] font-bold text-[24px] mt-[40px] ">
+                  {otherProduct.name}
+                </h3>
                 <button
                   className="w-[160px] h-[48px] bg-burnt-orange hover:bg-peach text-white mt-[32px] font-bold text-[13px] tracking-[1px] uppercase"
                   onClick={() => {
@@ -156,11 +202,11 @@ const ProductDetails = ({ addToCart, increment, decrement, count }) => {
           </div>
         </div>
 
-        <ThreeProducts/>
-        
-        <Man/>
+        <ThreeProducts />
 
-        <Footer/>
+        <Man />
+
+        <Footer />
       </div>
     </div>
   );

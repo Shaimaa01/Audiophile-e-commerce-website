@@ -101,7 +101,7 @@ function CheckOutPage({ cartItems }) {
   return (
     <div className="relative">
       {/* Header */}
-      <div className="bg-black h-[97px] "></div>
+      <div className="bg-black  xl:h-[96px] max-xl:h-[90px]  "></div>
 
       {/* container */}
       <div className=" bg-light-gray">
