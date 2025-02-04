@@ -154,36 +154,23 @@ const ProductDetails = ({ addToCart, increment, decrement, count }) => {
           />
         </div>
 
-        {/* tablet  */}
-        {/* <div className=" h-[592px] xl:my-[160px] xl:px-[165px] flex justify-between gap-[30px]">
-          <div className="flex justify-between flex-col gap-[30px]">
-            <img
-              src={product.gallery.first.desktop}
-              className="rounded-[8px] w-[445px] h-[280px]"
-            />
-            <img
-              src={product.gallery.second.desktop}
-              className="rounded-[8px] w-[445px] h-[280px]"
-            />
-          </div>
-          <img
-            src={product.gallery.third.desktop}
-            className="rounded-[8px] w-[635px] h-full"
-          />
-        </div> */}
-
         {/* you may also like */}
-        <div className="my-[160px] px-[165px] text-center">
+        <div className="xl:my-[160px] max-xl:my-[120px] xl:px-[165px] max-xl:px-[39px] text-center">
           <h2 className=" text-black tracking-[1.14px] font-bold text-[32px] uppercase">
             you may also like
           </h2>
-          <div className="mt-[64px] h-[471px] flex gap-[30px]">
+          <div className=" xl:mt-[64px] max-xl:mt-[56px] xl:h-[471px] flex xl:gap-[30px] max-xl:gap-[11px]">
             {product.others.map((otherProduct, index) => (
               <div key={index}>
                 <img
                   src={otherProduct.image.desktop}
                   alt={otherProduct.name}
-                  className="rounded-[8px]"
+                  className="rounded-[8px] max-lg:hidden "
+                />
+                <img
+                  src={otherProduct.image.tablet}
+                  alt={otherProduct.name}
+                  className="rounded-[8px] lg:hidden"
                 />
                 <h3 className="text-black tracking-[1.71px] font-bold text-[24px] mt-[40px] ">
                   {otherProduct.name}
@@ -202,7 +189,7 @@ const ProductDetails = ({ addToCart, increment, decrement, count }) => {
           </div>
         </div>
 
-        <ThreeProducts />
+        <div className="max-lg:my-[96px]">  <ThreeProducts /></div>
 
         <Man />
 

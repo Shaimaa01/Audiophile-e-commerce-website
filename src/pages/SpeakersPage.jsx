@@ -98,7 +98,7 @@ const SpeakersPage = () => {
         />
       </div>
 
-      <ThreeProducts />
+      <div className="max-lg:my-[96px]">  <ThreeProducts /></div>
 
       <Man />
 

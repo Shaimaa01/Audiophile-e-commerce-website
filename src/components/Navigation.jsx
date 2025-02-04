@@ -5,7 +5,7 @@ const Navigation = () => {
 
   return (
     <nav>
-      <ul className="flex uppercase gap-[34px] font-bold text-[13px] tracking-[2px] ">
+      <ul className="flex uppercase gap-[34px] font-bold text-[13px] tracking-[2px] max-sm:flex-col max-sm:items-center">
         <li>
           <Link
             to="/"

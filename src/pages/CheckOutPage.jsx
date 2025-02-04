@@ -125,9 +125,9 @@ function CheckOutPage({ cartItems }) {
             console.log("Form values:", values);
             return (
               <Form noValidate onSubmit={handleSubmit}>
-                <div className="flex justify-between px-[160px] pb-[160px] ">
+                <div className="flex justify-between xl:px-[160px] max-xl:px-[39px] xl:pb-[160px] max-xl:pb-[116px] max-xl:flex-col max-xl:items-center max-xl:gap-[32px]">
                   {/* check out form   */}
-                  <div className="w-[730px] py-[54px] px-[48px] bg-white rounded-[8px]">
+                  <div className="xl:w-[730px] max-xl:w-[689px] xl:py-[54px] max-xl:py-[30px] xl:px-[48px] max-xl:px-[27.5px] bg-white rounded-[8px]">
                     <h2 className="text-black tracking-[1.14px] font-bold text-[32px]">
                       CHECKOUT
                     </h2>
