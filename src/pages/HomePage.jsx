@@ -31,7 +31,7 @@ const HomePage = () => {
     const handleResize = () => {
       if (window.innerWidth >= 836) {
         setBackgroundImage(heroDesktop);
-      } else if (window.innerWidth >= 490) {
+      } else if (window.innerWidth >= 460) {
         setBackgroundImage(heroTablet);
       } else {
         setBackgroundImage(heroMobile);
@@ -67,7 +67,7 @@ const HomePage = () => {
         style={{
           backgroundImage: `url(${backgroundImage})`,
         }}
-        className="h-screen xl:px-[165px] max-xl:px-[39px]  max-sm:px-0 bg-cover bg-center bg-no-repeat "
+        className="h-screen max-sm:h-[600px] xl:px-[165px] max-xl:px-[39px]  max-sm:px-0  max-sm:bg-[length:100%_100%] bg-center sm:bg-cover bg-no-repeat "
       >
         {/* for header */}
         <div className=" xl:h-[96px] max-xl:h-[90px]  border-b border-white opacity-[10.4%] "></div>
@@ -103,7 +103,6 @@ const HomePage = () => {
 
       {/* second container */}
       <div className="max-lg:my-[96px] max-sm:mt-[40px] max-sm:mb-[120px]">
-      
         <ThreeProducts />
       </div>
 

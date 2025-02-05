@@ -80,7 +80,7 @@ const Cart = ({ cartItems, setCartItems, clearCart }) => {
 
       {/* Cart Window */}
       {isCartOpen && (
-        <div className="absolute top-[88px] right-0 w-[377px] p-[32px] bg-white shadow-lg rounded-lg z-50 animate-fade-in">
+        <div className="absolute top-[78px] right-0 w-[377px] max-sm:w-[327px] p-[32px] max-sm:px-[28px] bg-white shadow-lg rounded-lg z-50 animate-fade-in">
           {!cartItems.length ? (
             <p className="text-sm text-gray-500 text-center">
               Your cart is empty.
