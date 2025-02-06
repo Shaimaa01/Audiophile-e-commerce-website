@@ -9,22 +9,22 @@ function ThankYou({ isSubmitted, cartItems, formatCurrency, grandTotal }) {
       {isSubmitted && (
         <div>
           <div className="cart-overlay fixed top-0 left-0 w-full h-full bg-black opacity-40 z-40"></div>
-          <div className="absolute w-[540px] h-[581px] bg-white top-[222px] left-1/2 transform -translate-x-1/2  z-50 rounded-[8px] p-[48px]">
+          <div className="absolute w-[540px] max-sm:w-[327px] sm:h-[581px] bg-white top-[222px] left-1/2 transform -translate-x-1/2  z-50 rounded-[8px] p-[48px] max-sm:p-[32px]">
             <img
               src={confirmationIcon}
               alt="confirmation icon "
               className="w-[64px] h-[64px]"
             />
-            <h2 className="text-black font-bold text-[32px] tracking-[1.14px] leading-[36px] mt-[33px] ">
+            <h2 className="text-black font-bold text-[32px] max-sm:text-[24px] tracking-[1.14px] max-sm:tracking-[0.86px] leading-[36px] max-sm:leading-[28px] mt-[33px] max-sm:mt-[23px]">
               THANK YOU
               <br /> FOR YOUR ORDER
             </h2>
-            <p className="my-[24px] text-black font-medium text-[15px] tracking-0 opacity-50 ">
+            <p className="my-[24px] max-sm:mt-[16px] text-black font-medium text-[15px] tracking-0 opacity-50 ">
               You will receive an email confirmation shortly.
             </p>
-            <div className="flex ">
+            <div className="flex max-sm:flex-col">
               {/* Product details */}
-              <div className="flex-1 h-[140px] bg-light-gray p-[24px] rounded-tl-[8px] rounded-bl-[8px]">
+              <div className="sm:flex-1 h-[140px] bg-light-gray p-[24px] sm:rounded-tl-[8px] sm:rounded-bl-[8px] max-sm:rounded-tl-[8px] max-sm:rounded-tr-[8px]">
                 {/* img + price + quantity */}
                 <div className="flex justify-between border-b border-black border-opacity-[8%] pb-[12px]">
                   {/* img + price */}
@@ -58,7 +58,7 @@ function ThankYou({ isSubmitted, cartItems, formatCurrency, grandTotal }) {
               </div>
 
               {/* GRAND TOTAL */}
-              <div className=" w-[198px] h-[140px] bg-black flex flex-col  gap-[8px] justify-center pl-[32px] rounded-tr-[8px] rounded-br-[8px] ">
+              <div className=" w-[198px] max-sm:w-full h-[140px] max-sm:h-[92px] bg-black flex flex-col  gap-[8px] justify-center pl-[32px] max-sm:pl-[24px] sm:rounded-tr-[8px] sm:rounded-br-[8px] max-sm:rounded-bl-[8px] max-sm:rounded-br-[8px] ">
                 <h3 className="uppercase font-medium text-white text-[15px] tracking-0 opacity-50">
                   GRAND TOTAL
                 </h3>
@@ -74,7 +74,7 @@ function ThankYou({ isSubmitted, cartItems, formatCurrency, grandTotal }) {
                 navigate(`/`);
                 window.scrollTo({ top: 0 });
               }}
-              className=" w-full h-[48px] bg-burnt-orange hover:bg-peach text-white  font-medium text-[13px] tracking-[1px] uppercase mt-[46px]"
+              className=" w-full h-[48px] bg-burnt-orange hover:bg-peach text-white  font-medium text-[13px] tracking-[1px] uppercase mt-[46px] max-sm:mt-[23px]"
             >
               BACK TO HOME
             </button>

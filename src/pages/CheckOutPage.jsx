@@ -125,19 +125,19 @@ function CheckOutPage({ cartItems }) {
             console.log("Form values:", values);
             return (
               <Form noValidate onSubmit={handleSubmit}>
-                <div className="flex justify-between xl:px-[160px] max-xl:px-[39px] xl:pb-[160px] max-xl:pb-[116px] max-xl:flex-col max-xl:items-center max-xl:gap-[32px]">
+                <div className="flex justify-between xl:px-[160px] max-xl:px-[39px] max-sm:px-[24px] xl:pb-[160px] max-xl:pb-[116px] max-md:pb-[97px] max-xl:flex-col max-xl:items-center max-xl:gap-[32px]">
                   {/* check out form   */}
-                  <div className="xl:w-[730px] max-xl:w-[689px] xl:py-[54px] max-xl:py-[30px] xl:px-[48px] max-xl:px-[27.5px] bg-white rounded-[8px]">
-                    <h2 className="text-black tracking-[1.14px] font-bold text-[32px]">
+                  <div className="xl:w-[730px] max-xl:w-[689px] max-md:w-full xl:py-[54px] max-xl:py-[30px] xl:px-[48px] max-xl:px-[27.5px] max-md:p-[24px] bg-white rounded-[8px]">
+                    <h2 className="text-black tracking-[1.14px] max-sm:tracking-[1px] font-bold text-[32px] max-sm:text-[28px]">
                       CHECKOUT
                     </h2>
                     {/* Billing Details */}
-                    <h3 className="pt-[41px]  uppercase text-burnt-orange font-bold text-[13px] tracking-[0.93px]">
+                    <h3 className="pt-[41px] max-md:pt-[32px]  uppercase text-burnt-orange font-bold text-[13px] tracking-[0.93px]">
                       Billing Details
                     </h3>
-                    <div className="flex justify-between flex-wrap">
+                    <div className="flex justify-between flex-wrap max-md:w-full max-md:gap-[8px]">
                       {/* name */}
-                      <div className="flex flex-col">
+                      <div className="flex flex-col max-md:w-full">
                         <label
                           htmlFor="name"
                           className={` font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px] ${
@@ -158,7 +158,7 @@ function CheckOutPage({ cartItems }) {
                             errors.name && touched.name
                               ? "border-2 border-red focus:border-red"
                               : "border-silver-gray focus:border-burnt-orange"
-                          } border rounded-[8px] w-[309px] h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
+                          } border rounded-[8px] w-[309px] max-md:w-full h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
                         />
                         <ErrorMessage
                           name="name"
@@ -167,7 +167,7 @@ function CheckOutPage({ cartItems }) {
                         />
                       </div>
                       {/* email */}
-                      <div className="flex flex-col">
+                      <div className="flex flex-col max-md:w-full">
                         <label
                           htmlFor="email"
                           className={` font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px] ${
@@ -188,7 +188,7 @@ function CheckOutPage({ cartItems }) {
                             errors.email && touched.email
                               ? "border-2 border-red focus:border-red"
                               : "border-silver-gray focus:border-burnt-orange"
-                          } border rounded-[8px] w-[309px] h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
+                          } border rounded-[8px] w-[309px] max-md:w-full h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
                         />
                         <ErrorMessage
                           name="email"
@@ -197,7 +197,7 @@ function CheckOutPage({ cartItems }) {
                         />
                       </div>
                       {/* phone */}
-                      <div className="flex flex-col">
+                      <div className="flex flex-col max-md:w-full">
                         <label
                           htmlFor="phone"
                           className={` font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px] ${
@@ -218,7 +218,7 @@ function CheckOutPage({ cartItems }) {
                             errors.phone && touched.phone
                               ? "border-2 border-red focus:border-red"
                               : "border-silver-gray focus:border-burnt-orange"
-                          } border rounded-[8px] w-[309px] h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
+                          } border rounded-[8px] w-[309px] max-md:w-full h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
                         />
                         <ErrorMessage
                           name="phone"
@@ -228,12 +228,12 @@ function CheckOutPage({ cartItems }) {
                       </div>
                     </div>
                     {/* shipping info */}
-                    <h3 className="pt-[41px]  uppercase text-burnt-orange font-bold text-[13px] tracking-[0.93px]">
+                    <h3 className="pt-[41px] max-md:pt-[32px]  uppercase text-burnt-orange font-bold text-[13px] tracking-[0.93px]">
                       shipping info
                     </h3>
-                    <div className="flex justify-between flex-wrap">
+                    <div className="flex justify-between flex-wrap max-md:gap-[8px]">
                       {/* address */}
-                      <div className="flex flex-col w-full">
+                      <div className="flex flex-col w-full"> 
                         <label
                           htmlFor="address"
                           className={` font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px] ${
@@ -254,7 +254,7 @@ function CheckOutPage({ cartItems }) {
                             errors.address && touched.address
                               ? "border-2 border-red focus:border-red"
                               : "border-silver-gray focus:border-burnt-orange"
-                          } border rounded-[8px] w-[309px] h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
+                          } border rounded-[8px] w-full h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
                         />
                         <ErrorMessage
                           name="address"
@@ -264,7 +264,7 @@ function CheckOutPage({ cartItems }) {
                       </div>
 
                       {/* ZIP Code */}
-                      <div className="flex flex-col ">
+                      <div className="flex flex-col max-md:w-full">
                         <label
                           htmlFor="zip"
                           className={` font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px] ${
@@ -285,7 +285,7 @@ function CheckOutPage({ cartItems }) {
                             errors.zip && touched.zip
                               ? "border-2 border-red focus:border-red"
                               : "border-silver-gray focus:border-burnt-orange"
-                          } border rounded-[8px] w-[309px] h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
+                          } border rounded-[8px] w-[309px] max-md:w-full h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
                         />
                         <ErrorMessage
                           name="zip"
@@ -295,7 +295,7 @@ function CheckOutPage({ cartItems }) {
                       </div>
 
                       {/* City */}
-                      <div className="flex flex-col ">
+                      <div className="flex flex-col max-md:w-full">
                         <label
                           htmlFor="city"
                           className={` font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px] ${
@@ -316,7 +316,7 @@ function CheckOutPage({ cartItems }) {
                             errors.city && touched.city
                               ? "border-2 border-red focus:border-red"
                               : "border-silver-gray focus:border-burnt-orange"
-                          } border rounded-[8px] w-[309px] h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
+                          } border rounded-[8px] w-[309px] max-md:w-full h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
                         />
                         <ErrorMessage
                           name="city"
@@ -326,7 +326,7 @@ function CheckOutPage({ cartItems }) {
                       </div>
 
                       {/* Country */}
-                      <div className="flex flex-col ">
+                      <div className="flex flex-col max-md:w-full">
                         <label
                           htmlFor="country"
                           className={` font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px] ${
@@ -347,7 +347,7 @@ function CheckOutPage({ cartItems }) {
                             errors.country && touched.country
                               ? "border-2 border-red focus:border-red"
                               : "border-silver-gray focus:border-burnt-orange"
-                          } border rounded-[8px] w-[309px] h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
+                          } border rounded-[8px] w-[309px] max-md:w-full h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
                         />
                         <ErrorMessage
                           name="country"
@@ -357,7 +357,7 @@ function CheckOutPage({ cartItems }) {
                       </div>
                     </div>
                     {/* payment details */}
-                    <h3 className="pt-[41px]  uppercase text-burnt-orange font-bold text-[13px] tracking-[0.93px]">
+                    <h3 className="pt-[41px] max-md:pt-[32px]  uppercase text-burnt-orange font-bold text-[13px] tracking-[0.93px]">
                       payment details
                     </h3>
                     <div>
@@ -365,15 +365,15 @@ function CheckOutPage({ cartItems }) {
                       <div
                         role="group"
                         aria-labelledby="payment-method"
-                        className="flex justify-between mt-[16px]"
+                        className="flex max-sm:flex-col justify-between mt-[16px]"
                       >
-                        <h4 className="text-black font-bold text-[12px] tracking-[-0.21px] mb-[9px] ">
+                        <h4 className="text-black font-bold text-[12px] tracking-[-0.21px] mb-[9px] max-sm:mb-[17px] ">
                           Payment Method
                         </h4>
                         <div className="flex flex-col gap-[16px]">
                           {/* e-mony */}
                           <div
-                            className={`hover:border-burnt-orange border rounded-[8px] w-[309px] h-[56px] pl-[21px] flex items-center gap-[16px]  ${
+                            className={`hover:border-burnt-orange border rounded-[8px] w-[309px] max-sm:w-full h-[56px] pl-[21px] flex items-center gap-[16px]  ${
                               values.paymentMethod === "e-Money"
                                 ? "border-burnt-orange"
                                 : "border-silver-gray"
@@ -397,7 +397,7 @@ function CheckOutPage({ cartItems }) {
 
                           {/* Cash on Delivery */}
                           <div
-                            className={`hover:border-burnt-orange border rounded-[8px] w-[309px] h-[56px] pl-[21px] flex items-center gap-[16px] cursor-pointer ${
+                            className={`hover:border-burnt-orange border rounded-[8px] w-[309px] max-sm:w-full h-[56px] pl-[21px] flex items-center gap-[16px] cursor-pointer ${
                               values.paymentMethod === "Cash on Delivery"
                                 ? "border-burnt-orange"
                                 : "border-silver-gray"
@@ -423,9 +423,9 @@ function CheckOutPage({ cartItems }) {
 
                       {/* Conditional e-Money fields */}
                       {values.paymentMethod === "e-Money" && (
-                        <div className="flex justify-between flex-wrap pt-[16px]">
+                        <div className="flex justify-between flex-wrap pt-[16px] max-sm:gap-[8px]">
                           {/* e-Money Number */}
-                          <div className="flex flex-col">
+                          <div className="flex flex-col max-md:w-full">
                             <label
                               htmlFor="eMoneyNumber"
                               className={` font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px] ${
@@ -446,7 +446,7 @@ function CheckOutPage({ cartItems }) {
                                 errors.eMoneyNumber && touched.eMoneyNumber
                                   ? "border-2 border-red focus:border-red"
                                   : "border-silver-gray focus:border-burnt-orange"
-                              } border rounded-[8px] w-[309px] h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
+                              } border rounded-[8px] w-[309px] max-md:w-full h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
                             />
                             <ErrorMessage
                               name="eMoneyNumber"
@@ -456,7 +456,7 @@ function CheckOutPage({ cartItems }) {
                           </div>
 
                           {/* e-Money PIN */}
-                          <div className="flex flex-col">
+                          <div className="flex flex-col max-md:w-full">
                             <label
                               htmlFor="eMoneyPIN"
                               className={` font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px] ${
@@ -477,7 +477,7 @@ function CheckOutPage({ cartItems }) {
                                 errors.eMoneyPIN && touched.eMoneyPIN
                                   ? "border-2 border-red focus:border-red"
                                   : "border-silver-gray focus:border-burnt-orange"
-                              } border rounded-[8px] w-[309px] h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
+                              } border rounded-[8px] w-[309px] max-md:w-full h-[56px] pl-[24px] placeholder:text-black placeholder:opacity-40 placeholder:tracking-[-0.25px] placeholder:font-bold placeholder:text-[14px] font-bold text-[14px] tracking-[-0.25px]`}
                             />
                             <ErrorMessage
                               name="eMoneyPIN"
