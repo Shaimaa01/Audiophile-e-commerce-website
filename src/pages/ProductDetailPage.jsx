@@ -79,7 +79,7 @@ const ProductDetails = ({ addToCart, increment, decrement, count }) => {
                 NEW PRODUCT
               </p>
             )}
-            <h2 className="font-bold text-[40px] max-sm:text-[28px] text-black tracking-[1.43px] max-sm:tracking-[1px] sm:leading-[44px] max-w-[247px] min-[418px]:mx-auto sm:mx-0">
+            <h2 className="font-bold text-[40px] max-sm:text-[28px] text-black tracking-[1.43px] max-sm:tracking-[1px] sm:leading-[44px] max-w-[255px] min-[418px]:mx-auto sm:mx-0">
               {product.name}
             </h2>
             <p className="text-black leading-[25px] tracking-[0] font-medium text-[15px] opacity-[50%] max-w-[445px]  sm:my-[32px] max-sm:my-[24px]">
