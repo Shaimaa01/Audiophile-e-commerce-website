@@ -1,4 +1,8 @@
-# React + Vite
+# Frontend Mentor - Audiophile e-commerce website solution
+
+## Overview
+
+This is a solution to the [Audiophile e-commerce website challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/audiophile-ecommerce-website-C8cuSd_wx).
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
@@ -6,12 +10,6 @@ Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-# Frontend Mentor - Audiophile e-commerce website solution
-
-This is a solution to the [Audiophile e-commerce website challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/audiophile-ecommerce-website-C8cuSd_wx).
-
-## Overview
 
 ### The challenge
 
@@ -35,10 +33,29 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://github.com/Shaimaa01/Audiophile-e-commerce-website/tree/main)
-- Live Site URL: [Add live site URL here](https://audiophile-e-commerce-website-taupe.vercel.app/)
+- Solution URL: [ solution URL ](https://github.com/Shaimaa01/Audiophile-e-commerce-website/tree/main)
+- Live Site URL: [ live site URL ](https://audiophile-e-commerce-website-taupe.vercel.app/)
 
-## My process
+### Run the Project
+
+Follow these steps to set up and run the project locally on your machine.
+
+- git clone https://github.com/Shaimaa01/Audiophile-e-commerce-website.git
+- npm install
+- npm run dev
+
+### Development Dependencies  
+
+- Vite  
+- ESLint  
+- Prettier  
+- @vitejs/plugin-react  
+- Tailwind CSS  
+- Formik  
+- Yup 
+- React
+- React-DOM 
+
 
 ### Built with
 
@@ -47,5 +64,3 @@ React
 Tailwind CSS
 Formik
 Yup
-
-
