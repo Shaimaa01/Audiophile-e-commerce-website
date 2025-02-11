@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
 import confirmationIcon from "/assets/checkout/icon-order-confirmation.svg";
 import { useNavigate } from "react-router-dom";
-import { formatCurrency } from "../utils/formatCurrency";
+import { formatCurrency } from "../../utils/formatCurrency";
+import { calculateTotals } from "./orderTotals";
 
-function ThankYou({ isSubmitted, cartItems, grandTotal, clearCart }) {
+function ThankYou({ isSubmitted, cartItems, clearCart }) {
   const navigate = useNavigate();
+  const { grandTotal } = calculateTotals(cartItems);
   return (
     <>
       {isSubmitted && cartItems.length > 0 && (

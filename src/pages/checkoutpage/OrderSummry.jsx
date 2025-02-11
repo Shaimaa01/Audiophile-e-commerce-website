@@ -1,6 +1,9 @@
 /* eslint-disable react/prop-types */
-import { formatCurrency } from "../utils/formatCurrency";
-function OrderSummry({ cartItems, calculateTotal, shipping, vat, grandTotal }) {
+import { formatCurrency } from "../../utils/formatCurrency";
+import { calculateTotals } from "./orderTotals";
+function OrderSummry({ cartItems }) {
+  const { productTotal, shipping, vat, grandTotal } =
+    calculateTotals(cartItems);
   return (
     <div className="xl:w-[350px] max-xl:w-[689px] max-md:w-full h-fit py-[32px] px-[33px] max-sm:px-[24px]  bg-white rounded-[8px] ">
       <h2 className="text-black uppercase font-bold text-[18px] tracking-[1.29px] ">
@@ -45,7 +48,7 @@ function OrderSummry({ cartItems, calculateTotal, shipping, vat, grandTotal }) {
             total
           </h3>
           <p className="font-bold text-[18px] tracking-0">
-            {formatCurrency(calculateTotal())}
+            {formatCurrency(productTotal)}
           </p>
         </div>
 

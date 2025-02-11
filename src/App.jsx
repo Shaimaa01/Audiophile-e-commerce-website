@@ -7,7 +7,7 @@ import HomePage from "./pages/HomePage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import Header from "./components/Header";
 import { useState, useEffect } from "react";
-import CheckOutPage from "./pages/CheckOutPage";
+import CheckOutPage from "./pages/checkoutpage/CheckOutPage";
 import Footer from "./components/Footer";
 
 function App() {
