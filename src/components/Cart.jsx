@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { formatCurrency } from "../utils/formatCurrency";
 
 const Cart = ({ cartItems, setCartItems, clearCart }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -123,11 +124,7 @@ const Cart = ({ cartItems, setCartItems, clearCart }) => {
                           {item.name.split(" ")[0]}
                         </h2>
                         <p className="text-black font-bold text-[14px] tracking-0 opacity-[50%] leading-[25px]">
-                          {new Intl.NumberFormat("en-US", {
-                            style: "currency",
-                            currency: "USD",
-                            maximumFractionDigits: 0,
-                          }).format(item.price)}
+                        {formatCurrency(item.price)}
                         </p>
                       </div>
                     </div>
@@ -159,11 +156,7 @@ const Cart = ({ cartItems, setCartItems, clearCart }) => {
                     total
                   </h3>
                   <p className="font-bold text-[18px] tracking-0">
-                    {new Intl.NumberFormat("en-US", {
-                      style: "currency",
-                      currency: "USD",
-                      maximumFractionDigits: 0,
-                    }).format(calculateTotal())}
+                   {formatCurrency(calculateTotal())}
                   </p>
                 </div>
 

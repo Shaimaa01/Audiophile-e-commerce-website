@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
-import confirmationIcon from "/public/assets/checkout/icon-order-confirmation.svg";
+import confirmationIcon from "/assets/checkout/icon-order-confirmation.svg";
 import { useNavigate } from "react-router-dom";
+import { formatCurrency } from "../utils/formatCurrency";
 
-function ThankYou({ isSubmitted, cartItems, formatCurrency, grandTotal }) {
+function ThankYou({ isSubmitted, cartItems, grandTotal }) {
   const navigate = useNavigate();
   return (
     <>

@@ -1,6 +1,6 @@
-import man from "/public/assets/home/desktop/Bitmap.svg";
-import manTablet from "/public/assets/shared/tablet/image-best-gear.jpg";
-import manMobile from "/public/assets/shared/mobile/image-best-gear.jpg";
+import man from "/assets/home/desktop/Bitmap.svg";
+import manTablet from "/assets/shared/tablet/image-best-gear.jpg";
+import manMobile from "/assets/shared/mobile/image-best-gear.jpg";
 
 function Man() {
   return (

@@ -29,7 +29,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](/public/Screenshot%202025-02-07%20at%2015-38-50%20audiophile.png)
+![](/Screenshot%202025-02-07%20at%2015-38-50%20audiophile.png)
 
 ### Links
 
@@ -44,18 +44,17 @@ Follow these steps to set up and run the project locally on your machine.
 - npm install
 - npm run dev
 
-### Development Dependencies  
+### Development Dependencies
 
-- Vite  
-- ESLint  
-- Prettier  
-- @vitejs/plugin-react  
-- Tailwind CSS  
-- Formik  
-- Yup 
+- Vite
+- ESLint
+- Prettier
+- @vitejs/plugin-react
+- Tailwind CSS
+- Formik
+- Yup
 - React
-- React-DOM 
-
+- React-DOM
 
 ### Built with
 

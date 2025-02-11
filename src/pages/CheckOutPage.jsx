@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import OrderSummry from "../components/OrderSummry";
 import { useState } from "react";
 import ThankYou from "../components/ThankYou";
-import Cash from "/public/assets/checkout/icon-cash-on-delivery.svg";
+import Cash from "/assets/checkout/icon-cash-on-delivery.svg";
 
 function CheckOutPage({ cartItems }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -76,14 +76,6 @@ function CheckOutPage({ cartItems }) {
       otherwise: (schema) => schema,
     }),
   });
-
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      maximumFractionDigits: 0,
-    }).format(amount);
-  };
 
   const calculateTotal = () => {
     const productTotal = cartItems.reduce(
@@ -509,7 +501,6 @@ function CheckOutPage({ cartItems }) {
                   {/* summry */}
                   <OrderSummry
                     cartItems={cartItems}
-                    formatCurrency={formatCurrency}
                     calculateTotal={calculateTotal}
                     shipping={shipping}
                     vat={vat}
@@ -526,7 +517,6 @@ function CheckOutPage({ cartItems }) {
       <ThankYou
         isSubmitted={isSubmitted}
         cartItems={cartItems}
-        formatCurrency={formatCurrency}
         calculateTotal={calculateTotal}
         grandTotal={grandTotal}
       />

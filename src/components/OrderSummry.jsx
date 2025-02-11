@@ -1,12 +1,6 @@
 /* eslint-disable react/prop-types */
-function OrderSummry({
-  cartItems,
-  formatCurrency,
-  calculateTotal,
-  shipping,
-  vat,
-  grandTotal,
-}) {
+import { formatCurrency } from "../utils/formatCurrency";
+function OrderSummry({ cartItems, calculateTotal, shipping, vat, grandTotal }) {
   return (
     <div className="xl:w-[350px] max-xl:w-[689px] max-md:w-full h-fit py-[32px] px-[33px] max-sm:px-[24px]  bg-white rounded-[8px] ">
       <h2 className="text-black uppercase font-bold text-[18px] tracking-[1.29px] ">
@@ -89,7 +83,6 @@ function OrderSummry({
       {/*  button */}
       <button
         type="submit"
-      
         className=" w-full h-[48px] bg-burnt-orange hover:bg-peach text-white  font-medium text-[13px] tracking-[1px] uppercase mt-[24px]"
       >
         CONTINUE & PAY

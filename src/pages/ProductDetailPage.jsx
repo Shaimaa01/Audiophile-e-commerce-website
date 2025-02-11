@@ -14,7 +14,7 @@ const ProductDetails = ({ addToCart, increment, decrement, count }) => {
   const navigate = useNavigate();
 
   // Format the price
-  const formattedPrice = new Intl.NumberFormat("en-US", {
+  const formattedPrice = new IrFormat("en-US", {
     style: "currency",
     currency: "USD",
     minimumFractionDigits: 0, // No decimals
@@ -161,13 +161,13 @@ const ProductDetails = ({ addToCart, increment, decrement, count }) => {
 
             <img
               src={secondGalleryImg}
-               alt="Second product gallery image showing product from a different angle"
+              alt="Second product gallery image showing product from a different angle"
               className="rounded-[8px] xl:w-[445px] h-full max-lg:h-[174px] max-sm:h-full"
             />
           </div>
           <img
             src={thirdGalleryImg}
-             alt="Third product gallery image featuring a wider view of the product"
+            alt="Third product gallery image featuring a wider view of the product"
             className="rounded-[8px] xl:w-[635px] sm:h-full max-sm:h-[368px] max-xl:w-3/5 max-sm:w-full "
           />
         </section>
