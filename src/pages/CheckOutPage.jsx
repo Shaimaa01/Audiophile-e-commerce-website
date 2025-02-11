@@ -7,7 +7,7 @@ import { useState } from "react";
 import ThankYou from "../components/ThankYou";
 import Cash from "/assets/checkout/icon-cash-on-delivery.svg";
 
-function CheckOutPage({ cartItems }) {
+function CheckOutPage({ cartItems , clearCart }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const initialValues = {
     name: "",
@@ -102,18 +102,14 @@ function CheckOutPage({ cartItems }) {
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={(values, { resetForm }) => {
-            console.log("Form submitted:", values);
             resetForm();
             setIsSubmitted(true);
             window.scrollTo({ top: 200 });
           }}
         >
-          {({ handleSubmit, isValid, errors, touched, values }) => {
-            // Add isValid, errors, and touched
-            console.log("Form is valid:", isValid);
-            console.log("Form errors:", errors);
-            console.log("Touched fields:", touched);
-            console.log("Form values:", values);
+          {({ handleSubmit, errors, touched, values }) => {
+            
+            
             return (
               <Form noValidate onSubmit={handleSubmit}>
                 <div className="flex justify-between xl:px-[160px] max-xl:px-[39px] max-sm:px-[24px] xl:pb-[160px] max-xl:pb-[116px] max-md:pb-[97px] max-xl:flex-col max-xl:items-center max-xl:gap-[32px]">
@@ -505,6 +501,7 @@ function CheckOutPage({ cartItems }) {
                     shipping={shipping}
                     vat={vat}
                     grandTotal={grandTotal}
+                  
                   />
                 </div>
               </Form>
@@ -519,6 +516,7 @@ function CheckOutPage({ cartItems }) {
         cartItems={cartItems}
         calculateTotal={calculateTotal}
         grandTotal={grandTotal}
+        clearCart={clearCart}
       />
     </section>
   );

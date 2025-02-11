@@ -3,11 +3,11 @@ import confirmationIcon from "/assets/checkout/icon-order-confirmation.svg";
 import { useNavigate } from "react-router-dom";
 import { formatCurrency } from "../utils/formatCurrency";
 
-function ThankYou({ isSubmitted, cartItems, grandTotal }) {
+function ThankYou({ isSubmitted, cartItems, grandTotal, clearCart }) {
   const navigate = useNavigate();
   return (
     <>
-      {isSubmitted && (
+      {isSubmitted && cartItems.length > 0 && (
         <div>
           <div className="cart-overlay fixed top-0 left-0 w-full h-full bg-black opacity-40 z-40"></div>
           <div className="absolute w-[540px] max-sm:w-[327px] sm:h-[581px] bg-white top-[222px] left-1/2 transform -translate-x-1/2  z-50 rounded-[8px] p-[48px] max-sm:p-[32px]">
@@ -74,6 +74,7 @@ function ThankYou({ isSubmitted, cartItems, grandTotal }) {
               onClick={() => {
                 navigate(`/`);
                 window.scrollTo({ top: 0 });
+                clearCart();
               }}
               className=" w-full h-[48px] bg-burnt-orange hover:bg-peach text-white  font-medium text-[13px] tracking-[1px] uppercase mt-[46px] max-sm:mt-[23px]"
             >

@@ -13,13 +13,8 @@ import Footer from "./components/Footer";
 function App() {
   // Initialize cartItems with data from localStorage
   const [cartItems, setCartItems] = useState(() => {
-    try {
-      const storedCart = localStorage.getItem("cartItems");
-      return storedCart ? JSON.parse(storedCart) : []; // Return parsed data or empty array
-    } catch (error) {
-      console.error("Failed to parse cartItems from localStorage:", error);
-      return []; // Fallback to empty array if parsing fails
-    }
+    const storedCart = localStorage.getItem("cartItems");
+    return storedCart ? JSON.parse(storedCart) : [];
   });
   const [count, setCount] = useState(1);
 
@@ -86,12 +81,11 @@ function App() {
             />
             <Route
               path="/check-out"
-              element={<CheckOutPage cartItems={cartItems} />}
+              element={<CheckOutPage cartItems={cartItems} clearCart={clearCart} />}
             />
-           
           </Routes>
         </main>
-         <Footer />
+        <Footer />
       </Router>
     </>
   );

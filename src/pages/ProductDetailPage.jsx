@@ -7,18 +7,12 @@ import { useNavigate } from "react-router-dom";
 import ThreeProducts from "../components/ThreeProducts";
 import Man from "../components/Man";
 import { useState, useEffect } from "react";
+import { formatCurrency } from "../utils/formatCurrency";
 
 const ProductDetails = ({ addToCart, increment, decrement, count }) => {
   const { id } = useParams();
   const product = data.find((item) => item.id === parseInt(id));
   const navigate = useNavigate();
-
-  // Format the price
-  const formattedPrice = new IrFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 0, // No decimals
-  }).format(product.price);
 
   const [productImage, setProductImage] = useState();
   const [firstGalleryImg, setFirstGalleryImg] = useState();
@@ -85,7 +79,7 @@ const ProductDetails = ({ addToCart, increment, decrement, count }) => {
               {product.description}
             </p>
             <p className="text-black font-bold text-[18px] tracking-[1.29px] ">
-              {formattedPrice}
+              {formatCurrency(product.price)}
             </p>
             <div className="sm:mt-[47px] max-sm:mt-[31px] flex gap-4 ">
               <div className="w-[120px] h-[48px] bg-light-gray flex justify-between items-center px-[15.5px]">
