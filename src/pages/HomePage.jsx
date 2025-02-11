@@ -3,7 +3,6 @@ import data from "../data.json";
 
 import circles from "/assets/home/desktop/pattern-circles.svg";
 import { useNavigate } from "react-router-dom";
-import Footer from "../components/Footer";
 import Man from "../components/Man";
 import heroDesktop from "/assets/home/desktop/image-hero.jpg";
 import heroTablet from "/assets/home/tablet/image-header.jpg";
@@ -61,9 +60,9 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className="bg-off-white">
+    <section aria-labelledby="home-page" className="bg-off-white">
       {/* first container  */}
-      <div
+      <section
         style={{
           backgroundImage: `url(${backgroundImage})`,
         }}
@@ -99,15 +98,15 @@ const HomePage = () => {
             </button>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* second container */}
-      <div className="max-lg:my-[96px] max-sm:mt-[40px] max-sm:mb-[120px]">
+      <section className="max-lg:my-[96px] max-sm:mt-[40px] max-sm:mb-[120px]">
         <ThreeProducts />
-      </div>
+      </section>
 
       {/* third container  */}
-      <div className="lg:h-[560px] bg-burnt-orange xl:mx-[165px] max-xl:mx-[39px] max-sm:mx-[24px] rounded-[8px] relative overflow-hidden flex items-center max-lg:flex-col max-lg:items-center max-lg:justify-center ">
+      <section className="lg:h-[560px] bg-burnt-orange xl:mx-[165px] max-xl:mx-[39px] max-sm:mx-[24px] rounded-[8px] relative overflow-hidden flex items-center max-lg:flex-col max-lg:items-center max-lg:justify-center ">
         {/* bg  circles for desktop */}
         <div className="w-full h-full absolute -left-36 -top-8 max-lg:hidden">
           <img src={circles} alt="circles" />
@@ -121,9 +120,9 @@ const HomePage = () => {
         />
 
         {/* img zx9 speaker  */}
-        <div className="lg:w-[370px] max-lg:w-[197px] max-sm:w-[170.25px] lg:h-[490px] max-lg:h-[237px] max-sm:h-[205px] max-lg:mt-[64px] max-sm:mt-[55px] z-10 lg:absolute lg:left-[144px] lg:-bottom-14 ">
-          <img src={zx9Image} />
-        </div>
+        <section className="lg:w-[370px] max-lg:w-[197px] max-sm:w-[170.25px] lg:h-[490px] max-lg:h-[237px] max-sm:h-[205px] max-lg:mt-[64px] max-sm:mt-[55px] z-10 lg:absolute lg:left-[144px] lg:-bottom-14 ">
+          <img src={zx9Image} alt="zx9 speaker" />
+        </section>
 
         <div className=" max-w-[349px] h-[303px] lg:ml-[666px] max-lg:text-center max-lg:flex max-lg:flex-col max-lg:justify-center max-lg:items-center max-lg:my-[64px] max-sm:mt-[32px] max-sm:mb-[55px]">
           <h2 className=" font-bold sm:text-[56px] max-sm:text-[36px] text-white tracking-[2px] max-sm:tracking-[1.29px] leading-[58px] max-sm:leading-[40px] ">
@@ -137,10 +136,10 @@ const HomePage = () => {
             See Product
           </button>
         </div>
-      </div>
+      </section>
 
       {/* fourth container */}
-      <div
+      <section
         className="xl:mx-[165px] max-xl:mx-[39px] max-sm:mx-[24px] xl:my-[48px] max-sm:my-[24px] max-xl:my-[32px] h-[320px] rounded-[8px] flex items-center max-xl:bg-right max-xl:bg-no-repeat max-xl:bg-cover"
         style={{
           backgroundImage: `url(${zx7Image})`,
@@ -154,10 +153,10 @@ const HomePage = () => {
             see product
           </button>
         </div>
-      </div>
+      </section>
 
       {/* fifth container */}
-      <div className=" xl:mx-[165px] max-xl:mx-[39px] max-sm:mx-[24px] sm:h-[320px] flex  max-sm:flex-col justify-between sm:gap-[10px] max-sm:gap-[24px] ">
+      <section className=" xl:mx-[165px] max-xl:mx-[39px] max-sm:mx-[24px] sm:h-[320px] flex  max-sm:flex-col justify-between sm:gap-[10px] max-sm:gap-[24px] ">
         <div className="w-1/2  max-sm:w-full sm:h-[320px]   rounded-[8px]">
           <img
             src={earphonesImage}
@@ -175,12 +174,10 @@ const HomePage = () => {
             </button>
           </div>
         </div>
-      </div>
+      </section>
 
       <Man />
-
-      <Footer />
-    </div>
+    </section>
   );
 };
 

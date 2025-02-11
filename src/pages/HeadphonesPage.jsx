@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
-import Footer from "../components/Footer";
 import Man from "../components/Man";
 import ThreeProducts from "../components/ThreeProducts";
 import data from "../data.json";
@@ -43,7 +42,7 @@ const HeadphonesPage = () => {
   }, []);
 
   return (
-    <div className="bg-off-white">
+    <section aria-labelledby="headphones-page" className="bg-off-white">
       {/* header */}
       <div className=" xl:h-[96px] max-xl:h-[90px]  bg-black  ">
         {/* border for header  */}
@@ -51,12 +50,12 @@ const HeadphonesPage = () => {
       </div>
 
       {/* headphone header */}
-      <div className="h-[240px] max-sm:h-[102px] bg-black text-white tracking-[1.43px] max-sm:tracking-[2px] font-bold text-[40px] max-sm:text-[28px] flex items-center justify-center">
+      <h2 className="h-[240px] max-sm:h-[102px] bg-black text-white tracking-[1.43px] max-sm:tracking-[2px] font-bold text-[40px] max-sm:text-[28px] flex items-center justify-center">
         HEADPHONES
-      </div>
+      </h2>
 
       {/* xx99II */}
-      <div className="xl:my-[160px] max-xl:my-[120px] max-sm:my-[64px] xl:mx-[165px] max-xl:mx-[39px] max-sm:mx-[24px] flex xl:h-[560px] justify-between max-xl:gap-[20px] max-[850px]:flex-col max-[850px]:gap-[52px] max-sm:gap-[32px] max-[850px]:items-center">
+      <section className="xl:my-[160px] max-xl:my-[120px] max-sm:my-[64px] xl:mx-[165px] max-xl:mx-[39px] max-sm:mx-[24px] flex xl:h-[560px] justify-between max-xl:gap-[20px] max-[850px]:flex-col max-[850px]:gap-[52px] max-sm:gap-[32px] max-[850px]:items-center">
         <img
           src={xx99IIImage}
           alt="xx99II headphone "
@@ -70,9 +69,9 @@ const HeadphonesPage = () => {
                 NEW PRODUCT
               </p>
             )}
-            <h2 className="font-bold text-black text-[40px] max-sm:text-[28px] tracking-[1.43px] max-sm:tracking-[1px] sm:leading-[44px] pb-[24px] uppercase max-w-[360px] max-[850px]:mx-auto">
+            <h3 className="font-bold text-black text-[40px] max-sm:text-[28px] tracking-[1.43px] max-sm:tracking-[1px] sm:leading-[44px] pb-[24px] uppercase max-w-[360px] max-[850px]:mx-auto">
               {xx99II.name}
-            </h2>
+            </h3>
             <p className=" text-black font-medium text-[15px] leading-[25px] opacity-[50%] tracking-0">
               {xx99II.description}
             </p>
@@ -87,10 +86,10 @@ const HeadphonesPage = () => {
             </button>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* xx99I */}
-      <div className="xl:my-[160px] max-xl:my-[120px] max-sm:my-[64px] xl:mx-[165px] max-xl:mx-[39px] max-sm:mx-[24px] flex xl:h-[560px] justify-between max-xl:gap-[20px] max-[850px]:flex-col max-[850px]:gap-[52px] max-sm:gap-[32px] max-[850px]:items-center">
+      <section className="xl:my-[160px] max-xl:my-[120px] max-sm:my-[64px] xl:mx-[165px] max-xl:mx-[39px] max-sm:mx-[24px] flex xl:h-[560px] justify-between max-xl:gap-[20px] max-[850px]:flex-col max-[850px]:gap-[52px] max-sm:gap-[32px] max-[850px]:items-center">
         <img
           src={xx99IImage}
           alt="xx99I headphone "
@@ -104,9 +103,9 @@ const HeadphonesPage = () => {
                 NEW PRODUCT
               </p>
             )}
-            <h2 className="font-bold text-black text-[40px] max-sm:text-[28px] tracking-[1.43px] max-sm:tracking-[1px] sm:leading-[44px] pb-[24px] uppercase max-w-[360px] max-[850px]:mx-auto">
+            <h3 className="font-bold text-black text-[40px] max-sm:text-[28px] tracking-[1.43px] max-sm:tracking-[1px] sm:leading-[44px] pb-[24px] uppercase max-w-[360px] max-[850px]:mx-auto">
               {xx99I.name}
-            </h2>
+            </h3>
             <p className=" text-black font-medium text-[15px] leading-[25px] opacity-[50%] tracking-0">
               {xx99I.description}
             </p>
@@ -126,10 +125,10 @@ const HeadphonesPage = () => {
           alt="xx99I headphone "
           className="xl:w-[540px] max-xl:w-1/2 h-full rounded-md max-[850px]:hidden"
         />
-      </div>
+      </section>
 
       {/* xx59 */}
-      <div className="xl:my-[160px] max-xl:my-[120px] max-sm:my-[64px] xl:mx-[165px] max-xl:mx-[39px] max-sm:mx-[24px] flex xl:h-[560px] justify-between max-xl:gap-[20px] max-[850px]:flex-col max-[850px]:gap-[52px] max-sm:gap-[32px] max-[850px]:items-center">
+      <section className="xl:my-[160px] max-xl:my-[120px] max-sm:my-[64px] xl:mx-[165px] max-xl:mx-[39px] max-sm:mx-[24px] flex xl:h-[560px] justify-between max-xl:gap-[20px] max-[850px]:flex-col max-[850px]:gap-[52px] max-sm:gap-[32px] max-[850px]:items-center">
         <img
           src={xx59Image}
           alt="xx99II headphone "
@@ -143,9 +142,9 @@ const HeadphonesPage = () => {
                 NEW PRODUCT
               </p>
             )}
-            <h2 className="font-bold text-black text-[40px] max-sm:text-[28px] tracking-[1.43px] max-sm:tracking-[1px] sm:leading-[44px] pb-[24px] uppercase max-w-[247px] max-[850px]:mx-auto">
+            <h3 className="font-bold text-black text-[40px] max-sm:text-[28px] tracking-[1.43px] max-sm:tracking-[1px] sm:leading-[44px] pb-[24px] uppercase max-w-[247px] max-[850px]:mx-auto">
               {xx59.name}
-            </h2>
+            </h3>
             <p className=" text-black font-medium text-[15px] leading-[25px] opacity-[50%] tracking-0">
               {xx59.description}
             </p>
@@ -160,16 +159,14 @@ const HeadphonesPage = () => {
             </button>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="max-lg:my-[96px] max-sm:my-[120px]">
+      <section className="max-lg:my-[96px] max-sm:my-[120px]">
         <ThreeProducts />
-      </div>
+      </section>
 
       <Man />
-
-      <Footer />
-    </div>
+    </section>
   );
 };
 

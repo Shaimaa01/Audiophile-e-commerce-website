@@ -1,4 +1,3 @@
-import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HeadphonesPage from "./pages/HeadphonesPage";
@@ -9,6 +8,7 @@ import ProductDetailPage from "./pages/ProductDetailPage";
 import Header from "./components/Header";
 import { useState, useEffect } from "react";
 import CheckOutPage from "./pages/CheckOutPage";
+import Footer from "./components/Footer";
 
 function App() {
   // Initialize cartItems with data from localStorage
@@ -67,27 +67,31 @@ function App() {
           clearCart={clearCart}
           setCartItems={setCartItems}
         />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/headphones" element={<HeadphonesPage />} />
-          <Route path="/speakers" element={<SpeakersPage />} />
-          <Route path="/earphones" element={<EarphonesPage />} />
-          <Route
-            path="/product/:id"
-            element={
-              <ProductDetailPage
-                addToCart={addToCart}
-                increment={increment}
-                decrement={decrement}
-                count={count}
-              />
-            }
-          />
-          <Route
-            path="/check-out"
-            element={<CheckOutPage cartItems={cartItems} />}
-          />
-        </Routes>
+        <main>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/headphones" element={<HeadphonesPage />} />
+            <Route path="/speakers" element={<SpeakersPage />} />
+            <Route path="/earphones" element={<EarphonesPage />} />
+            <Route
+              path="/product/:id"
+              element={
+                <ProductDetailPage
+                  addToCart={addToCart}
+                  increment={increment}
+                  decrement={decrement}
+                  count={count}
+                />
+              }
+            />
+            <Route
+              path="/check-out"
+              element={<CheckOutPage cartItems={cartItems} />}
+            />
+           
+          </Routes>
+        </main>
+         <Footer />
       </Router>
     </>
   );

@@ -3,7 +3,7 @@ import Navigation from "../components/Navigation";
 
 function Footer() {
   return (
-    <div className="bg-dark-gray md:h-[365px] max-md:h-[400px] max-sm:h-full  xl:px-[165px] max-xl:px-[39px] max-sm:px-[24px] pt-[75px] max-sm:pt-[52px] relative  ">
+    <footer className="bg-dark-gray md:h-[365px] max-md:h-[400px] max-sm:h-full  xl:px-[165px] max-xl:px-[39px] max-sm:px-[24px] pt-[75px] max-sm:pt-[52px] relative  ">
       <p className="w-[100px] h-1 bg-burnt-orange absolute top-0 xl:left-[165px] max-xl:left-[39px] max-sm:left-1/2 max-sm:-translate-x-1/2"></p>
       <div className="flex justify-between items-center text-white  max-md:flex-col max-md:items-start max-sm:items-center max-md:gap-[32px] max-sm:gap-[48px]">
         <Logo />
@@ -130,7 +130,7 @@ function Footer() {
           </a>
         </div>
       </div>
-    </div>
+    </footer>
   );
 }
 

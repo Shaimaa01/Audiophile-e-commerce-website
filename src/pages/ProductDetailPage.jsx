@@ -6,7 +6,6 @@ import GoBackButton from "../components/GoBackButton";
 import { useNavigate } from "react-router-dom";
 import ThreeProducts from "../components/ThreeProducts";
 import Man from "../components/Man";
-import Footer from "../components/Footer";
 import { useState, useEffect } from "react";
 
 const ProductDetails = ({ addToCart, increment, decrement, count }) => {
@@ -55,16 +54,16 @@ const ProductDetails = ({ addToCart, increment, decrement, count }) => {
   }, []);
 
   return (
-    <div className="">
+    <section>
       {/* Header */}
       <div className="bg-black  xl:h-[96px] max-xl:h-[90px]  "></div>
 
       {/* product container */}
-      <div className=" bg-off-white">
+      <section className=" bg-off-white">
         <GoBackButton />
 
         {/* Product Image +  product details  */}
-        <div className="flex xl:gap-[124.5px] max-xl:gap-[69px] max-md:gap-[20px] max-sm:gap-[32px] justify-center  items-center min-[418px]:text-center sm:text-start max-lg:h-[560px] max-md:h-[480px] max-sm:h-full xl:px-[165px] sm:px-[39px] max-sm:px-[24px] max-sm:flex-col ">
+        <section className="flex xl:gap-[124.5px] max-xl:gap-[69px] max-md:gap-[20px] max-sm:gap-[32px] justify-center  items-center min-[418px]:text-center sm:text-start max-lg:h-[560px] max-md:h-[480px] max-sm:h-full xl:px-[165px] sm:px-[39px] max-sm:px-[24px] max-sm:flex-col ">
           {/* Product Image */}
           <img
             src={productImage}
@@ -73,7 +72,7 @@ const ProductDetails = ({ addToCart, increment, decrement, count }) => {
           />
 
           {/* product details */}
-          <div className="max-xl:w-[339.5px]">
+          <section className="max-xl:w-[339.5px]">
             {product.new && (
               <p className="font-regular text-[14px] tracking-[10px] text-burnt-orange mb-[15px] max-sm:mb-[24px]">
                 NEW PRODUCT
@@ -118,11 +117,11 @@ const ProductDetails = ({ addToCart, increment, decrement, count }) => {
                 ADD TO CART
               </button>
             </div>
-          </div>
-        </div>
+          </section>
+        </section>
 
         {/* Features + in box */}
-        <div className="xl:my-[160px] max-xl:my-[120px] max-sm:my-[88px] xl:px-[165px] max-xl:px-[39px] max-sm:px-[24px] flex justify-between max-lg:gap-[120px] max-sm:gap-[88px] max-lg:flex-col">
+        <section className="xl:my-[160px] max-xl:my-[120px] max-sm:my-[88px] xl:px-[165px] max-xl:px-[39px] max-sm:px-[24px] flex justify-between max-lg:gap-[120px] max-sm:gap-[88px] max-lg:flex-col">
           <div>
             <h2 className="text-black tracking-[1.14px] max-sm:[0.86px] leading-[36px]  font-bold text-[32px] max-sm:text-[24px]">
               FEATURES
@@ -149,29 +148,32 @@ const ProductDetails = ({ addToCart, increment, decrement, count }) => {
               ))}
             </div>
           </div>
-        </div>
+        </section>
 
         {/* product photos */}
-        <div className=" lg:h-[592px] max-lg:h-[368px] max-sm:h-full xl:my-[160px] max-xl:my-[120px] max-sm:my-[88px] xl:px-[165px] max-xl:px-[39px] max-sm:px-[24px] flex max-sm:flex-col justify-between xl:gap-[30px] max-xl:gap-[18px] max-sm:gap-[20px]">
+        <section className=" lg:h-[592px] max-lg:h-[368px] max-sm:h-full xl:my-[160px] max-xl:my-[120px] max-sm:my-[88px] xl:px-[165px] max-xl:px-[39px] max-sm:px-[24px] flex max-sm:flex-col justify-between xl:gap-[30px] max-xl:gap-[18px] max-sm:gap-[20px]">
           <div className="flex justify-between flex-col xl:gap-[30px] max-xl:gap-[18px] max-sm:gap-[20px]  max-xl:w-2/5 max-sm:w-full">
             <img
               src={firstGalleryImg}
+              alt="First product gallery image showcasing product details"
               className="rounded-[8px] xl:w-[445px] h-full max-lg:h-[174px] max-sm:w-full max-sm:h-full "
             />
 
             <img
               src={secondGalleryImg}
+               alt="Second product gallery image showing product from a different angle"
               className="rounded-[8px] xl:w-[445px] h-full max-lg:h-[174px] max-sm:h-full"
             />
           </div>
           <img
             src={thirdGalleryImg}
+             alt="Third product gallery image featuring a wider view of the product"
             className="rounded-[8px] xl:w-[635px] sm:h-full max-sm:h-[368px] max-xl:w-3/5 max-sm:w-full "
           />
-        </div>
+        </section>
 
         {/* you may also like */}
-        <div className="xl:my-[160px] max-xl:my-[120px] max-sm:my-[88px] xl:px-[165px] max-xl:px-[39px] max-sm:px-[24px] text-center">
+        <section className="xl:my-[160px] max-xl:my-[120px] max-sm:my-[88px] xl:px-[165px] max-xl:px-[39px] max-sm:px-[24px] text-center">
           <h2 className=" text-black tracking-[1.14px] max-sm:tracking-[0.86px] font-bold text-[32px] max-sm:text-[24px] uppercase">
             you may also like
           </h2>
@@ -208,17 +210,15 @@ const ProductDetails = ({ addToCart, increment, decrement, count }) => {
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
         <div className="max-lg:my-[96px] max-sm:my-[120px]">
           <ThreeProducts />
         </div>
 
         <Man />
-
-        <Footer />
-      </div>
-    </div>
+      </section>
+    </section>
   );
 };
 

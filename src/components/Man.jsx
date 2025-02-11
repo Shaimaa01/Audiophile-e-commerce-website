@@ -4,7 +4,7 @@ import manMobile from "/public/assets/shared/mobile/image-best-gear.jpg";
 
 function Man() {
   return (
-    <div className=" xl:mx-[165px] max-xl:mx-[39px] max-sm:mx-[24px] xl:my-[160px] max-xl:my-[96px] max-sm:my-[120px] xl:h-[588px] flex justify-between items-center max-xl:gap-[20px] max-md:gap-[63px] max-sm:gap-[40px] max-md:flex-col ">
+    <section className=" xl:mx-[165px] max-xl:mx-[39px] max-sm:mx-[24px] xl:my-[160px] max-xl:my-[96px] max-sm:my-[120px] xl:h-[588px] flex justify-between items-center max-xl:gap-[20px] max-md:gap-[63px] max-sm:gap-[40px] max-md:flex-col ">
       <img
         src={manTablet}
         alt="man wearing headphone black"
@@ -36,7 +36,7 @@ function Man() {
         alt="man wearing headphone black"
         className=" xl:w-[540px] xl:h-[588px] max-xl:w-1/2 max-md:hidden"
       />
-    </div>
+    </section>
   );
 }
 

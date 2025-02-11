@@ -2,7 +2,6 @@
 import GoBackButton from "../components/GoBackButton";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import Footer from "../components/Footer";
 import OrderSummry from "../components/OrderSummry";
 import { useState } from "react";
 import ThankYou from "../components/ThankYou";
@@ -99,7 +98,7 @@ function CheckOutPage({ cartItems }) {
   const grandTotal = calculateTotal() + shipping;
 
   return (
-    <div className="relative">
+    <section aria-labelledby="check-out-page" className="relative">
       {/* Header */}
       <div className="bg-black  xl:h-[96px] max-xl:h-[90px]  "></div>
 
@@ -233,7 +232,7 @@ function CheckOutPage({ cartItems }) {
                     </h3>
                     <div className="flex justify-between flex-wrap max-md:gap-[8px]">
                       {/* address */}
-                      <div className="flex flex-col w-full"> 
+                      <div className="flex flex-col w-full">
                         <label
                           htmlFor="address"
                           className={` font-bold text-[12px] tracking-[-0.21px] mb-[9px] mt-[16px] ${
@@ -490,10 +489,19 @@ function CheckOutPage({ cartItems }) {
 
                       {/* Conditional Cash on Delivery */}
                       {values.paymentMethod === "Cash on Delivery" && (
-                       <div className="flex justify-between items-center gap-[32px] mt-[30px]">
-                        <img src={Cash} alt=" icon cash on deilvery" className="w-[48px] h-[48px]"/>
-                        <p className="text-black tracking-0 leading-[25px] font-medium text-[15px] opacity-50">The ‘Cash on Delivery’ option enables you to pay in cash when our delivery courier arrives at your residence. Just make sure your address is correct so that your order will not be cancelled.</p>
-                       </div>
+                        <div className="flex justify-between items-center gap-[32px] mt-[30px]">
+                          <img
+                            src={Cash}
+                            alt=" icon cash on deilvery"
+                            className="w-[48px] h-[48px]"
+                          />
+                          <p className="text-black tracking-0 leading-[25px] font-medium text-[15px] opacity-50">
+                            The ‘Cash on Delivery’ option enables you to pay in
+                            cash when our delivery courier arrives at your
+                            residence. Just make sure your address is correct so
+                            that your order will not be cancelled.
+                          </p>
+                        </div>
                       )}
                     </div>
                   </div>
@@ -514,8 +522,6 @@ function CheckOutPage({ cartItems }) {
         </Formik>
       </div>
 
-      <Footer />
-
       {/* ThankYou */}
       <ThankYou
         isSubmitted={isSubmitted}
@@ -524,7 +530,7 @@ function CheckOutPage({ cartItems }) {
         calculateTotal={calculateTotal}
         grandTotal={grandTotal}
       />
-    </div>
+    </section>
   );
 }
 
