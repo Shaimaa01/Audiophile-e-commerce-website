@@ -4,7 +4,7 @@ const Logo = () => {
   return (
     <div className="text-2xl font-bold text-orange-500 ">
       <a href="/">
-        <img src={logo} alt="Logo" />
+        <img src={logo} alt="Company Name Logo"  />
       </a>
     </div>
   );

@@ -83,9 +83,9 @@ const HomePage = () => {
                 NEW PRODUCT
               </p>
             )}
-            <h2 className="font-bold text-white text-[56px] max-sm:text-[36px] tracking-[2px] max-sm:tracking-[1.29px] leading-[58px] max-sm:leading-[40px] pb-[24px] uppercase ">
+            <h1 className="font-bold text-white text-[56px] max-sm:text-[36px] tracking-[2px] max-sm:tracking-[1.29px] leading-[58px] max-sm:leading-[40px] pb-[24px] uppercase ">
               {product.name}
-            </h2>
+            </h1>
             <p className="max-w-[349px] text-white font-medium text-[15px] leading-[25px] opacity-[75%] tracking-0">
               Experience natural, lifelike audio and exceptional build quality
               made for the passionate music enthusiast.

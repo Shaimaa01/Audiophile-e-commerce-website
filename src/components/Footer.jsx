@@ -24,6 +24,7 @@ function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-burnt-orange cursor-pointer text-white  hover:scale-105"
+            aria-label="Visit our Facebook page"
           >
             <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -60,6 +61,7 @@ function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-burnt-orange cursor-pointer text-white "
+             aria-label="Visit our instagram page"
           >
             <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -83,6 +85,7 @@ function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-burnt-orange cursor-pointer text-white  hover:scale-105"
+             aria-label="Visit our Facebook page"
           >
             <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -119,6 +122,7 @@ function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-burnt-orange cursor-pointer text-white "
+             aria-label="Visit our instagram page"
           >
             <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
               <path

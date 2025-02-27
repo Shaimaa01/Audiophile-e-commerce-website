@@ -29,7 +29,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](/Screenshot%202025-02-07%20at%2015-38-50%20audiophile.png)
+![](/public/Screenshot%202025-02-07%20at%2015-38-50%20audiophile.png)
 
 ### Links
 
